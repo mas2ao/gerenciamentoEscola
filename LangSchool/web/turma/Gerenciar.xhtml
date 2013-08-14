@@ -1,0 +1,148 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <ui:composition template="/template.xhtml">
+        <ui:define name="panelHeader">Gerenciar Turmas</ui:define>
+        <ui:define name="centro">
+            <h:form>
+                <h:panelGrid columns="2" cellpadding="5">
+                    <h:outputText value="Pesquisar por:" />
+                    <p:selectOneMenu >
+                        <f:selectItem itemLabel="Nome" itemValue="1"/>
+                        <f:selectItem itemLabel="Curso" itemValue="3"/>
+                        <f:selectItem itemLabel="Nível" itemValue="4"/>
+                    </p:selectOneMenu>
+                </h:panelGrid>
+
+                <p:inputText style="width:60%" />
+                <p:button value="Buscar" style="color: blue" />
+
+                <p:panelGrid style="margin-top: 20px; width: 80%">
+                    <f:facet name="header">
+                        <p:row>
+                            <p:column style="font-weight: bold; color: teal" colspan="7">Resultados da Busca</p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column width="100px">Nome</p:column>
+                            <p:column width="100px">Curso</p:column>
+                            <p:column width="100px">Nível</p:column>
+                            <p:column width="30px">Vagas</p:column>
+                            <p:column style="font-weight: bold; color: orangered" colspan="3">Ações</p:column> 
+                        </p:row>
+                    </f:facet>
+
+                    <p:row>
+                        <p:column style="font-weight: normal; text-align: center">Nome</p:column>
+                        <p:column style="font-weight: normal; text-align: center">Japonês</p:column>
+                        <p:column style="font-weight: normal; text-align: center">Básico</p:column>
+                        <p:column style="font-weight: normal; text-align: center">30</p:column>
+                        <p:column>
+                            <div style="text-align: center">
+                                <p:commandButton value="VISUALIZAR" style="font-size: small; font-weight: bolder" onclick="dlgoV.show()" />
+                            </div>
+                        </p:column>
+
+                        <p:column>
+                            <div style="text-align: center">
+                                <p:commandButton value="ALTERAR" style="font-size: small; font-weight: bolder" onclick="dlgoA.show()" />
+                            </div>
+                        </p:column>
+                        <p:column>
+                            <div style="text-align: center">
+                                <p:commandButton value="REMOVER" style="font-size: small; font-weight: bolder; color: red" onclick="dlgE.show()"/>
+                            </div>
+                        </p:column>
+                    </p:row>
+                </p:panelGrid>
+
+                <p:dialog header="Visualizar Turma" widgetVar="dlgoV" >
+
+                    <h:panelGrid columns="2">
+                        <h:outputText value="Nome:" />
+                        <h:outputText value="Turma A" />
+                        <h:outputText value="Descricao:" />
+                        <h:outputText value="Turma destinada a alunos com as caracteristicas..." />
+                        <h:outputText value="Vagas:" />
+                        <h:outputText value="30" />
+                        <h:outputText value="Professor:" />
+                        <h:outputText value="Marcos Yukio" />
+                        <h:outputText value="Curso:" />
+                        <h:outputText value="Japonês" />
+                        <h:outputText value="Nível:" />
+                        <h:outputText value="Básico I" />
+
+
+                    </h:panelGrid>
+
+                </p:dialog>
+
+                <p:growl id="gTurma" showDetail="false"/>
+
+                <p:dialog header="Alterar Turma" widgetVar="dlgoA" >
+
+                    <h:panelGrid columns="2">
+                        <h:outputText value="Nome:" />
+                        <p:inputText value="Turma A" style="width: 350px "/>
+                        <h:outputText value="Descricao:" />
+                        <p:inputTextarea cols="50" value="Turma destinada a alunos com as caracteristicas..."/>
+                        <h:outputText value="Vagas:" />
+                        <p:spinner value="30" min="0" max="50" maxlength="2" />
+                        <h:outputText value="Professor:" />
+                        <p:selectOneMenu valueChangeListener="2">
+                            <f:selectItem itemLabel="José Silva" itemValue="5"></f:selectItem>
+                            <f:selectItem itemLabel="Adam Evans Adans" itemValue="1"></f:selectItem>
+                            <f:selectItem itemLabel="Marcos Yukio" itemValue="2"></f:selectItem>
+
+                        </p:selectOneMenu>
+                        <h:outputText value="Curso:" />
+                        <p:selectOneMenu >
+                            <f:selectItem itemLabel="Alemão" itemValue="5"></f:selectItem>
+                            <f:selectItem itemLabel="Inglês" itemValue="1"></f:selectItem>
+                            <f:selectItem itemLabel="Japonês" itemValue="2"></f:selectItem>
+
+                        </p:selectOneMenu>
+                        <h:outputText value="Nivel:" />
+                        <p:selectOneMenu >
+                            <f:selectItem itemLabel="Básico" itemValue="5"></f:selectItem>
+                            <f:selectItem itemLabel="Médio" itemValue="1"></f:selectItem>
+                            <f:selectItem itemLabel="Avançado" itemValue="2"></f:selectItem>
+
+                        </p:selectOneMenu>
+
+                    </h:panelGrid>
+                    <br/>
+                    <h:panelGrid columns="2">     
+                        <p:commandButton value="CANCELAR" style="color: red; font-weight: bolder; font-size: small" onclick="dlgoA.hide()"/>
+                        <p:commandButton value="SALVAR" style="color: green; font-weight: bolder; font-size: small; margin-left: 10px" actionListener="#{gmessages.alterar}" update="gTurma" oncomplete="dlgoA.hide()" />
+                    </h:panelGrid>
+                </p:dialog>
+
+
+                <p:dialog header="Remover" widgetVar="dlgE">
+                    <h:outputText value="Tem certeza que deseja remover esta Turma??" style="font-size: large; color: red" />
+                    <br/>
+                    <p:separator/>
+                    <br/>
+                    <h:panelGrid columns="2" style="width: 100%">
+                        <p:column colspan="20">
+                            <div style="text-align: center">
+                                <p:commandButton value="SIM" style="color: green; font-weight: bolder" actionListener="#{gmessages.remover}" update="gTurma" oncomplete="dlgE.hide()"/>
+                            </div>
+                        </p:column>
+                        <p:column colspan="20">
+                            <div style="text-align: center">
+                                <p:commandButton value="NÃO" style="color: red; font-weight: bolder" onclick="dlgE.hide()"/>
+                            </div>
+                        </p:column>                        
+                    </h:panelGrid>
+                </p:dialog>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>
+

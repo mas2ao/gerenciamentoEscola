@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <ui:composition template="/template.xhtml">
+        <ui:define name="panelHeader">Cadastrar Aluno</ui:define>
+        <ui:define name="centro">
+            <h:form>
+                <script>
+                    function swNew(){
+                        self.location = "/LangSchool/faces/aluno/Cadastro.xhtml";
+                    }
+                    function swBack(){
+                        self.location = "/LangSchool/faces/index.xhtml";
+                    }
+                </script>
+
+                <p:dialog header="Cadastrado com Sucesso!" widgetVar="confirmation">  
+                    <p:outputLabel value="Deseja cadastrar outro aluno?" />
+                    <br/>
+                    <br/>
+                    <p:separator/>
+                    <p:commandButton id="confirm" value="Sim" onclick="confirmation.hide();swNew();" type="button"/>  
+                    <p:commandButton id="decline" value="Não" onclick="confirmation.hide();swBack()" type="button"/>   
+
+                </p:dialog> 
+                <h:panelGrid columns="2">
+                    <p:photoCam />
+                    <p:commandButton value="Capturar" style="color: blue" />                  
+                </h:panelGrid>
+                <h:panelGrid columns="4" cellpadding="5">
+                    <h:outputText value="Nome:" />
+                    <p:inputText value="Jousué dos Santos Junior" />
+                    <h:outputText value="Data de nascimento:" />
+                    <p:calendar />
+                    <h:outputText value="Número RG:" />
+                    <p:inputText value="6.452.674-8" />
+                    <h:outputText value="Sexo:" />
+                    <p:selectOneRadio>
+                        <f:selectItem itemLabel="Masculino" />
+                        <f:selectItem itemLabel="Feminino" />
+                    </p:selectOneRadio>
+                    <h:outputText value="Telefone Residencial:" />
+                    <p:inputText value="3029-3464" />
+                    <h:outputText value="  " />
+                    <h:outputText value="  " />
+                    <h:outputText value="CEP:" />
+                    <p:inputText value="86000-380" />
+                    <h:outputText value="Estado:" />
+                    <p:selectOneMenu>
+                        <f:selectItem itemLabel="AC" />
+                        <f:selectItem itemLabel="AL" />
+                        <f:selectItem itemLabel="AP" />
+                        <f:selectItem itemLabel="AM" />
+                        <f:selectItem itemLabel="BA" />
+                        <f:selectItem itemLabel="CE" />
+                        <f:selectItem itemLabel="DF" />
+                        <f:selectItem itemLabel="ES" />
+                        <f:selectItem itemLabel="GO" />
+                        <f:selectItem itemLabel="MA" />
+                        <f:selectItem itemLabel="MT" />
+                        <f:selectItem itemLabel="MS" />
+                        <f:selectItem itemLabel="MG" />
+                        <f:selectItem itemLabel="PA" />
+                        <f:selectItem itemLabel="PB" />
+                        <f:selectItem itemLabel="PR" />
+                        <f:selectItem itemLabel="PE" />
+                        <f:selectItem itemLabel="PI" />
+                        <f:selectItem itemLabel="RJ" />
+                        <f:selectItem itemLabel="RN" />
+                        <f:selectItem itemLabel="RS" />
+                        <f:selectItem itemLabel="RO" />
+                        <f:selectItem itemLabel="RR" />
+                        <f:selectItem itemLabel="SC" />
+                        <f:selectItem itemLabel="SP" />
+                        <f:selectItem itemLabel="SE" />
+                        <f:selectItem itemLabel="TO" />
+                        <f:selectItem itemLabel="--" />
+                    </p:selectOneMenu>
+                    <h:outputText value="Cidade:" />
+                    <p:inputText value="Maringá" />
+                    <h:outputText value="Endereço:" />
+                    <p:inputText value="Rua Logo Ali" />
+                    <h:outputText value="Número:" />
+                    <p:inputText value="666" />
+                    <h:outputText value="  " />
+                    <h:outputText value="  " />
+                    <h:outputText value="Nome do Pai:" />
+                    <p:inputText value="Josué dos Santos" />
+                    <h:outputText value="Telefone do Pai:" />
+                    <p:inputText value="9974-2365" />  
+                    <h:outputText value="Nome da Mãe:" />
+                    <p:inputText value="Maria Rosângela dos Santos" />
+                    <h:outputText value="Telefone da Mãe:" />
+                    <p:inputText value="9137-2345" />
+                </h:panelGrid>
+
+                <h:panelGrid columns="2">
+                    <p:commandButton value="Salvar" style="color: green" onclick="confirmation.show()"/>
+                    <p:commandButton value="Cancelar" style="color: red" onclick="swBack()"/>      
+                </h:panelGrid>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>
+

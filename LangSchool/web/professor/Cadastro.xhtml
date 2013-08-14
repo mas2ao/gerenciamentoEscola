@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <ui:composition template="/template.xhtml">
+        <ui:define name="panelHeader">Cadastrar Professor</ui:define>
+        <ui:define name="centro">
+            <h:form>
+                <script>
+                    function swNew(){
+                        self.location = "/LangSchool/faces/professor/Cadastro.xhtml";
+                    }
+                    function swBack(){
+                        self.location = "/LangSchool/faces/index.xhtml";
+                    }
+                </script>
+                <p:dialog header="Cadastrado com Sucesso!" widgetVar="confirmation">  
+                    <p:outputLabel value="Deseja cadastrar outro professor?" />
+                    <br/>
+                    <br/>
+                    <p:separator/>
+                    <p:commandButton id="confirm" value="Sim" onclick="confirmation.hide();swNew();" type="button"/>  
+                    <p:commandButton id="decline" value="Não" onclick="confirmation.hide();swBack()" type="button"/>   
+
+                </p:dialog> 
+                    <h:panelGrid columns="2" cellpadding="4" style="width: auto;height: 100%">
+                        <h:outputText value="Nome:" />
+                        <p:inputText value="Armando Max Ilimus"/>
+                        <h:outputText value="Email:" />
+                        <p:inputText value="aMaxiliumus@liamtoh.moc"/>
+                        <h:outputText value="Telefone:" />
+                        <p:inputMask mask="(99)9999-9999"/>
+                        
+                        <p:commandButton value="Cadastrar" style="color: green" onclick="confirmation.show()"/>
+                        <p:commandButton value="Cancelar" style="color: red" onclick="swBack()"/>      
+                    </h:panelGrid>
+
+            </h:form>
+
+        </ui:define>
+    </ui:composition>
+</html>
+

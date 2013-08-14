@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <ui:composition template="/template.xhtml">
+        <ui:define name="panelHeader">Matricular</ui:define>
+        <ui:define name="centro">
+            <h:form>
+                <script>
+                    function swNew(){
+                        self.location = "/LangSchool/faces/matricula/Cadastro.xhtml";
+                    }
+                    function swBack(){
+                        self.location = "/LangSchool/faces/index.xhtml";
+                    }
+                </script>
+
+                <p:dialog header="Matriculado com Sucesso!" widgetVar="confirmation">  
+                    <p:outputLabel value="Deseja matricular outro aluno?" />
+                    <br/>
+                    <br/>
+                    <p:separator/>
+                    <p:commandButton id="confirm" value="Sim" onclick="confirmation.hide();swNew();" type="button"/>  
+                    <p:commandButton id="decline" value="Não" onclick="confirmation.hide();swBack()" type="button"/>   
+
+                </p:dialog> 
+                <h:panelGrid columns="2" cellpadding="4" style="width: auto;height: 100%">
+                    <h:outputText value="Nome:" />
+                    <p:autoComplete value="Jousué" />
+                    
+                    <h:outputText value="Data:" />
+                    <p:calendar />
+
+                    <h:outputText value="Curso:" />
+                    <p:selectOneMenu>
+                        <f:selectItem itemLabel="Alemão" />
+                        <f:selectItem itemLabel="Mandarim" />
+                        <f:selectItem itemLabel="Zdslfjklês" />
+                    </p:selectOneMenu>
+
+                    <h:outputText value="Nível:"/>
+                    <p:selectOneMenu>
+                        <f:selectItem itemLabel="Zdslfjklês Basico I" />
+                        <f:selectItem itemLabel="Zdslfjklês Basico II" />
+                        <f:selectItem itemLabel="Zdslfjklês Basico III" />
+                        <f:selectItem itemLabel="Zdslfjklês Basico IV" />
+                        <f:selectItem itemLabel="Zdslfjklês Intermediario I" />
+                        <f:selectItem itemLabel="Zdslfjklês Intermediario II" />
+                        <f:selectItem itemLabel="Zdslfjklês Avancado I" />
+                        <f:selectItem itemLabel="Zdslfjklês Avancado II" />
+                    </p:selectOneMenu>
+
+                    <p:commandButton value="Matricular" style="color: green" onclick="confirmation.show()"/>
+                    <p:commandButton value="Cancelar" style="color: red" onclick="swBack()"/>      
+                </h:panelGrid>
+            </h:form>
+
+        </ui:define>
+    </ui:composition>
+</html>
+

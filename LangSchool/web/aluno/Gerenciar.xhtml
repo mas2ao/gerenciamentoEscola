@@ -1,0 +1,263 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="panelHeader">Gerenciar Aluno</ui:define>
+        <ui:define name="centro">
+            <h:form>
+                <h:panelGrid columns="2" cellpadding="5">
+                    <h:outputText value="Pesquisar por:" />
+                    <p:selectOneMenu>
+                        <f:selectItem itemLabel="Nome" />
+                        <f:selectItem itemLabel="Estado do Aluno" />
+                    </p:selectOneMenu>
+                </h:panelGrid>
+
+                <p:inputText style="width:60%" />
+                <p:button value="Buscar" style="color: blue" />
+
+                <p:panelGrid style="margin-top: 20px; width: 80%">
+                    <f:facet name="header">
+                        <p:row>
+                            <p:column style="font-weight: bold; color: teal" colspan="181">Resultados da Busca</p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column colspan="100">Nome</p:column>
+                            <p:column colspan="1">Idade</p:column>
+                            <p:column style="font-weight: bold; color: orangered" colspan="80">Ações</p:column> 
+                        </p:row>
+                    </f:facet>
+
+                    <p:row>
+                        <p:column colspan="100" style="font-weight: normal; text-align: center">Massao Uyeno</p:column>
+                        <p:column colspan="1" style="font-weight: normal; text-align: center">22</p:column>
+                        <p:column colspan="20">
+                            <div style="text-align: center">
+                                <p:commandButton value="VISUALIZAR" style="font-size: small; font-weight: bolder" />
+                            </div>
+                        </p:column>
+                        <p:column colspan="20">
+                            <div style="text-align: center">
+                                <p:commandButton value="ALTERAR" style="font-size: small; font-weight: bolder" />
+                            </div>
+                        </p:column>
+                        <p:column colspan="20">
+                            <div style="text-align: center">
+                                <p:commandButton value="REMOVER" style="font-size: small; font-weight: bolder; color: red" />
+                            </div>
+                        </p:column>
+                    </p:row>
+
+                    <p:row>
+                        <p:column colspan="100" style="font-weight: normal; background-color: #dddddd; text-align: center">Jousué dos Santos Junior</p:column>
+                        <p:column colspan="1" style="font-weight: normal; text-align: center">22</p:column>
+                        <p:column colspan="20">
+                            <div style="text-align: center">
+                                <p:commandButton value="VISUALIZAR" style="font-size: small; font-weight: bolder" onclick="dlgo.show();" />
+                            </div>
+                        </p:column>
+                        <p:column colspan="20">
+                            <div style="text-align: center">
+                                <p:commandButton value="ALTERAR" style="font-size: small; font-weight: bolder" onclick="dlgo2.show()"/>
+                            </div>
+                        </p:column>
+                        <p:column colspan="20">
+                            <div style="text-align: center">
+                                <p:commandButton value="REMOVER" style="font-size: small; color: red; font-weight: bolder" onclick="dlgo3.show()"/>
+                            </div>
+                        </p:column>
+                    </p:row>
+
+                    <p:row>
+                        <p:column colspan="100" style="font-weight: normal; text-align: center">Yukio Siraichi</p:column>
+                        <p:column colspan="1" style="font-weight: normal; text-align: center">20</p:column>
+                        <p:column colspan="20">
+                            <div style="text-align: center">
+                                <p:commandButton value="VISUALIZAR" style="font-size: small; font-weight: bolder" />
+                            </div>
+                        </p:column>
+                        <p:column colspan="20">
+                            <div style="text-align: center">
+                                <p:commandButton value="ALTERAR" style="font-size: small; font-weight: bolder" />
+                            </div>
+                        </p:column>
+                        <p:column colspan="20">
+                            <div style="text-align: center">
+                                <p:commandButton value="REMOVER" style="font-size: small; font-weight: bolder; color: red" />
+                            </div>
+                        </p:column>
+                    </p:row>
+                </p:panelGrid>
+
+                <p:dialog header="Visualização" widgetVar="dlgo">
+                    <p:accordionPanel style="font-size: 13px" activeIndex="-1">
+                        <p:tab title="Vizualizar Foto">
+                            <h:panelGrid columns="2">
+                                <p:photoCam style="width: 300px; height: 250px" />                  
+                            </h:panelGrid>
+                        </p:tab>
+                    </p:accordionPanel>
+                    <p:scrollPanel style="width: 800px; height: 400px">
+                        <h:panelGrid columns="4" cellpadding="5">
+                            <h:outputText value="Nome:" />
+                            <p:inputText value="Jousué dos Santos Junior" />
+                            <h:outputText value="Data de nascimento:" />
+                            <p:inputText value="01/08/1990" />
+                            <h:outputText value="Número RG:" />
+                            <p:inputText value="6.452.674-8" />
+                            <h:outputText value="Sexo:" />
+                            <p:selectOneRadio>
+                                <f:selectItem itemLabel="Masculino" />
+                                <f:selectItem itemLabel="Feminino" />
+                            </p:selectOneRadio>
+                            <h:outputText value="Telefone Residencial:" />
+                            <p:inputText value="3029-3464" />
+                            <h:outputText value="  " />
+                            <h:outputText value="  " />
+                            <h:outputText value="CEP:" />
+                            <p:inputText value="86000-380" />
+                            <h:outputText value="Estado:" />
+                            <p:selectOneMenu>
+                                <f:selectItem itemLabel="AC" />
+                            </p:selectOneMenu>
+                            <h:outputText value="Cidade:" />
+                            <p:inputText value="Maringá" />
+                            <h:outputText value="Endereço:" />
+                            <p:inputText value="Rua Logo Ali" />
+                            <h:outputText value="Número:" />
+                            <p:inputText value="666" />
+                            <h:outputText value="  " />
+                            <h:outputText value="  " />
+                            <h:outputText value="Nome do Pai:" />
+                            <p:inputText value="Josué dos Santos" />
+                            <h:outputText value="Telefone do Pai:" />
+                            <p:inputText value="9974-2365" />  
+                            <h:outputText value="Nome da Mãe:" />
+                            <p:inputText value="Maria Rosângela dos Santos" />
+                            <h:outputText value="Telefone da Mãe:" />
+                            <p:inputText value="9137-2345" />
+                            <h:outputText value="Estado:" />
+                            <p:selectBooleanButton onLabel="INATIVO" offLabel="ATIVO" disabled="true"/>
+                        </h:panelGrid>
+                    </p:scrollPanel>
+                </p:dialog> 
+
+                <p:growl showDetail="false" severity="info" id="gAluno" />
+
+                <p:dialog header="Alterar Dados" widgetVar="dlgo2">
+                    <p:accordionPanel style="font-size: 13px" activeIndex="-1">
+                        <p:tab title="Vizualizar Foto">
+                            <h:panelGrid columns="2">
+                                <p:photoCam style="width: 300px; height: 250px" />  
+                                <p:commandButton value="Capturar" style="margin-left: 50px;color: blue" />                
+                            </h:panelGrid>
+                        </p:tab>
+                    </p:accordionPanel>
+                    <h:panelGrid columns="5" cellpadding="4">
+                        <h:outputText/>
+                        <h:outputText/>
+                        <p:commandButton value="Salvar" style="color: green" actionListener="#{gmessages.alterar}" update="gAluno" oncomplete="dlgo2.hide()"/>
+                        <h:outputText value="  " />
+                        <p:commandButton value="Cancelar" style="color: red" onclick="dlgo2.hide()"/> 
+                    </h:panelGrid>
+                    <p:scrollPanel style="width: 800px; height: 400px">
+                        <h:panelGrid columns="4" cellpadding="5">
+                            <h:outputText value="Nome:" />
+                            <p:inputText value="Jousué dos Santos Junior" />
+                            <h:outputText value="Data de nascimento:" />
+                            <p:inputText value="01/08/1990" />
+                            <h:outputText value="Número RG:" />
+                            <p:inputText value="6.452.674-8" />
+                            <h:outputText value="Sexo:" />
+                            <p:selectOneRadio>
+                                <f:selectItem itemLabel="Masculino" />
+                                <f:selectItem itemLabel="Feminino" />
+                            </p:selectOneRadio>
+                            <h:outputText value="Telefone Residencial:" />
+                            <p:inputText value="3029-3464" />
+                            <h:outputText value="  " />
+                            <h:outputText value="  " />
+                            <h:outputText value="CEP:" />
+                            <p:inputText value="86000-380" />
+                            <h:outputText value="Estado:" />
+                            <p:selectOneMenu>
+                                <f:selectItem itemLabel="AC" />
+                                <f:selectItem itemLabel="AL" />
+                                <f:selectItem itemLabel="AP" />
+                                <f:selectItem itemLabel="AM" />
+                                <f:selectItem itemLabel="BA" />
+                                <f:selectItem itemLabel="CE" />
+                                <f:selectItem itemLabel="DF" />
+                                <f:selectItem itemLabel="ES" />
+                                <f:selectItem itemLabel="GO" />
+                                <f:selectItem itemLabel="MA" />
+                                <f:selectItem itemLabel="MT" />
+                                <f:selectItem itemLabel="MS" />
+                                <f:selectItem itemLabel="MG" />
+                                <f:selectItem itemLabel="PA" />
+                                <f:selectItem itemLabel="PB" />
+                                <f:selectItem itemLabel="PR" />
+                                <f:selectItem itemLabel="PE" />
+                                <f:selectItem itemLabel="PI" />
+                                <f:selectItem itemLabel="RJ" />
+                                <f:selectItem itemLabel="RN" />
+                                <f:selectItem itemLabel="RS" />
+                                <f:selectItem itemLabel="RO" />
+                                <f:selectItem itemLabel="RR" />
+                                <f:selectItem itemLabel="SC" />
+                                <f:selectItem itemLabel="SP" />
+                                <f:selectItem itemLabel="SE" />
+                                <f:selectItem itemLabel="TO" />
+                                <f:selectItem itemLabel="--" />
+                            </p:selectOneMenu>
+                            <h:outputText value="Cidade:" />
+                            <p:inputText value="Maringá" />
+                            <h:outputText value="Endereço:" />
+                            <p:inputText value="Rua Logo Ali" />
+                            <h:outputText value="Número:" />
+                            <p:inputText value="666" />
+                            <h:outputText value="  " />
+                            <h:outputText value="  " />
+                            <h:outputText value="Nome do Pai:" />
+                            <p:inputText value="Josué dos Santos" />
+                            <h:outputText value="Telefone do Pai:" />
+                            <p:inputText value="9974-2365" />  
+                            <h:outputText value="Nome da Mãe:" />
+                            <p:inputText value="Maria Rosângela dos Santos" />
+                            <h:outputText value="Telefone da Mãe:" />
+                            <p:inputText value="9137-2345" />
+                            <h:outputText value="Estado:" />
+                            <p:selectBooleanButton onLabel="INATIVO" offLabel="ATIVO"/>
+                        </h:panelGrid>
+                    </p:scrollPanel>
+                </p:dialog> 
+
+                <p:dialog header="Remover" widgetVar="dlgo3">
+                    <h:outputText value="Tem certeza que deseja remover este aluno??" style="font-size: large; color: red" />
+                    <br/>
+                    <p:separator/>
+                    <br/>
+                    <h:panelGrid columns="2" style="width: 100%">
+                        <p:column colspan="20">
+                            <div style="text-align: center">
+                                <p:commandButton value="SIM" style="color: green; font-weight: bolder" actionListener="#{gmessages.remover}" update="gAluno" oncomplete="dlgo3.hide()"/>
+                            </div>
+                        </p:column>
+                        <p:column colspan="20">
+                            <div style="text-align: center">
+                                <p:commandButton value="NÃO" style="color: red; font-weight: bolder" onclick="dlgo3.hide()"/>
+                            </div>
+                        </p:column>                        
+                    </h:panelGrid>
+                </p:dialog>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>
+

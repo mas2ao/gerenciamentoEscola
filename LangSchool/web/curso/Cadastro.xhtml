@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="panelHeader">Cadastrar Curso</ui:define>
+        <ui:define name="centro">
+            <h:form>
+
+                <script>
+                    function swNew(){
+                        self.location = "/LangSchool/faces/curso/Cadastro.xhtml";
+                    }
+                    function swBack(){
+                        self.location = "/LangSchool/faces/index.xhtml";
+                    }
+                    function swNivel(){
+                        self.location = "/LangSchool/faces/nivel/Cadastro.xhtml";
+                    }
+                </script>
+
+                <p:dialog header="Cadastrado com Sucesso!" widgetVar="confirmation">  
+                    <p:outputLabel value="O que deseja fazer?" />
+                    <br/>
+                    <br/>
+                    <p:separator/>
+                    <h:panelGrid columns="1" cellpadding="3">
+                        <p:commandButton id="confirm" value="Cadastrar outro curso" onclick="confirmation.hide();swNew();" type="button"/>  
+                        <p:commandButton id="nivelNew" value="Cadastrar um nivel" onclick="confirmation.hide();swNivel()" type="button"/>   
+                        <p:commandButton id="decline" value="Sair" onclick="confirmation.hide();swBack()" type="button"/>   
+                    </h:panelGrid>
+                </p:dialog> 
+
+                <h:panelGrid columns="2" cellpadding="4">
+                    <h:outputText value="Nome:" />
+                    <p:inputText value="" style="width: 350px "/>
+                    <h:outputText value="Descricao:" />
+                    <p:inputTextarea cols="50"/>
+                    <h:outputText value="Carga Horária:" />
+                    <p:inputText value="" style="width: 50px "/>
+
+                </h:panelGrid >
+                <h:panelGrid columns="2" cellpadding="4">
+                    <p:commandButton value="Salvar" style="color: green" onclick="confirmation.show()"/>
+                    <p:commandButton value="Cancelar" style="color: red" onclick="swBack()"/>      
+                </h:panelGrid>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>
+
+

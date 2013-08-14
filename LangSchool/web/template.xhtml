@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <f:view>
+        <h:head>
+            <script>
+                function goHome(){
+                    self.location = "/LangSchool/faces/index.xhtml";
+                }
+            </script>
+            <title>
+                <ui:insert name="title">Titulo</ui:insert>
+            </title>
+        </h:head>
+        <h:body style="background-color: background">
+            <p:layout fullPage="true">
+                <p:layoutUnit position="center">
+                    <p:panel style="width: 100%; height: available; border: 0px;">
+                        <f:facet name="header">
+                            <ui:insert name="panelHeader">HEADER</ui:insert>
+                            <spam style="margin: 0px 0px 0px 0px; margin-left: 10px">
+                                <p:graphicImage id="help" value="/imagens/ajuda.png" style="cursor: pointer; width: 20px; height: 20px"/>
+                            </spam>
+                            <p:overlayPanel for="help" showEvent="mousedown" hideEvent="mousedown">
+                                <ui:insert name="help">Essa é uma ajuda!</ui:insert>
+                            </p:overlayPanel>
+                        </f:facet>
+                        <ui:insert name="centro">Centro</ui:insert>
+                    </p:panel>
+                </p:layoutUnit>
+                <p:layoutUnit position="north" style="padding: 0px 0px 0px 0px">
+                    <div style="width: available; height: 50px; background-color: #D20005; margin: 0px"/>
+                </p:layoutUnit>
+                <p:layoutUnit position="south" style="padding: 0px 0px 0px 0px">
+                    <div style="width: available; height: 50px; background-color: #D20005; margin: 0px"/>
+                </p:layoutUnit>
+                <p:layoutUnit position="west" size="233">    
+                    <p:commandButton style="z-index: 1;position: fixed;width: 220px; font-size: 14px; color: white;background-color: red" value="HOME" onclick="goHome()" />
+                    <p:panelMenu style="margin-top: 50px" multiple="false">
+                        <p:submenu label="Alunos" style="font-size: 12px; height: auto">
+                            <p:menuitem value="Cadastrar" url="/faces/aluno/Cadastro.xhtml"/>
+                            <p:menuitem value="Gerenciar" url="/faces/aluno/Gerenciar.xhtml"/>
+                        </p:submenu>
+                        <p:submenu label="Matricula" style="font-size: 12px; height: auto">
+                            <p:menuitem value="Cadastrar" url="/faces/matricula/Cadastro.xhtml"/>
+                            <p:menuitem value="Gerenciar" url="/faces/matricula/Gerenciar.xhtml"/>                                
+                        </p:submenu>
+                        <p:submenu label="Nota" style="font-size: 12px; height: auto">
+                            <p:menuitem value="Gerenciar" url="/faces/nota/Gerenciar.xhtml"/>
+                        </p:submenu>
+                        <p:submenu label="Presenca" style="font-size: 12px; height: auto">
+                            <p:menuitem value="Gerenciar" url="/faces/presenca/Gerenciar.xhtml"/>
+                        </p:submenu>
+                        <p:submenu label="Mensalidade" style="font-size: 12px; height: auto">
+                            <p:menuitem value="Gerenciar" url="/faces/mensalidade/Gerenciar.xhtml"/>
+                        </p:submenu>
+                        <p:submenu label="Reposicao" style="font-size: 12px; height: auto">
+                            <p:menuitem value="Cadastrar" url="/faces/reposicao/Cadastro.xhtml"/>
+                            <p:menuitem value="Gerenciar" url="/faces/reposicao/Gerenciar.xhtml"/>
+                        </p:submenu>
+                        <p:submenu label="Turmas" style="font-size: 12px; height: auto">
+                            <p:menuitem value="Cadastrar" url="/faces/turma/Cadastro.xhtml"/>                                
+                            <p:menuitem value="Gerenciar" url="/faces/turma/Gerenciar.xhtml"/>
+                        </p:submenu>
+                        <p:submenu label="Niveis" style="font-size: 12px; height: auto">
+                            <p:menuitem value="Cadastrar" url="/faces/nivel/Cadastro.xhtml"/>                                
+                            <p:menuitem value="Gerenciar" url="/faces/nivel/Gerenciar.xhtml"/>
+                        </p:submenu>
+                        <p:submenu label="Curso" style="font-size: 12px; height: auto">
+                            <p:menuitem value="Cadastrar" url="/faces/curso/Cadastro.xhtml"/>                                
+                            <p:menuitem value="Gerenciar" url="/faces/curso/Gerenciar.xhtml"/>
+                        </p:submenu>
+                        <p:submenu label="Professores" style="font-size: 12px; height: auto">
+                            <p:menuitem value="Cadastrar" url="/faces/professor/Cadastro.xhtml"/>
+                            <p:menuitem value="Gerenciar" url="/faces/professor/Gerenciar.xhtml"/>
+                        </p:submenu>
+                        <p:submenu label="Controle de Caixa" style="font-size: 12px; height: auto"> 
+                            <p:menuitem value="Cadastrar" url="/faces/caixa/Cadastro.xhtml"/>
+                            <p:menuitem value="Consultar e Estornar" url="/faces/caixa/Gerenciar.xhtml"/>
+                        </p:submenu>
+                        <p:submenu label="Emitir Documentos" style="font-size: 12px; height: auto">
+                            <p:menuitem value="Boletim" url="/faces/documentos/boletim.xhtml"/>
+                            <p:menuitem value="Certificado" url="/faces/documentos/certificado.xhtml"/>
+                            <p:menuitem value="Relatório Financeiro" url="/faces/documentos/relatorio.xhtml"/>
+                        </p:submenu>
+                    </p:panelMenu>
+                </p:layoutUnit>
+            </p:layout>
+        </h:body>
+    </f:view>
+</html>

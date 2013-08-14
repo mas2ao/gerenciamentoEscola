@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="panelHeader">Cadastrar Fluxo de Caixa</ui:define>
+        <ui:define name="centro">
+            <script>
+                function swNew(){
+                    self.location = "/LangSchool/faces/caixa/Cadastro.xhtml";
+                }
+                function swBack(){
+                    self.location = "/LangSchool/faces/index.xhtml";
+                }
+            </script>
+
+            <p:dialog header="Cadastrado com Sucesso!" widgetVar="confirmation">  
+                <p:outputLabel value="Deseja cadastrar outro registro?" />
+                <br/>
+                <br/>
+                <p:separator/>
+                <p:commandButton id="confirm" value="Sim" onclick="confirmation.hide();swNew();" type="button"/>  
+                <p:commandButton id="decline" value="Não" onclick="confirmation.hide();swBack()" type="button"/>   
+
+            </p:dialog> 
+            <h:form>
+                <h:panelGrid columns ="2" cellpadding="4">
+                    <h:outputText value="Descrição: "></h:outputText>
+                    <p:inputText />
+                    <h:outputText value="Valor: "></h:outputText>
+                    <p:inputMask mask="R$999,999"/>
+                    <h:outputText value="Data: "></h:outputText>
+                    <p:calendar />
+                </h:panelGrid>
+
+                <p:selectOneRadio>
+                    <f:selectItem itemLabel="Crédito"/>
+                    <f:selectItem itemLabel="Débito"/>
+                </p:selectOneRadio>
+                <br/>
+                <h:panelGrid columns="2" cellpadding="4">
+                    <p:commandButton value="Salvar" style="color: green" onclick="confirmation.show()"/>
+                    <p:commandButton value="Cancelar" style="color: red" onclick="swBack()"/>      
+                </h:panelGrid>
+
+                <br/>
+                <br/>
+                <p:separator/>
+                <h2>Atualizações Recentes</h2>
+                <br />
+                <p:panelGrid>
+
+                    <f:facet name="header">
+                        <p:row >  
+                            <p:column><h:outputText value="Data" style="font-weight: bolder"/></p:column>
+                            <p:column width="80%"><h:outputText value="Descrição" style="font-weight: bolder"/></p:column>
+                            <p:column><h:outputText value="Valor" style="font-weight: bolder"/></p:column>
+                            <p:column><h:outputText value="FormaPgto" style="font-weight: bolder"/></p:column>
+                        </p:row>
+                    </f:facet>
+                    <p:row>
+                        <p:column><h:outputText value="12/12/2012"/></p:column>
+                        <p:column><h:outputText value="Material"/></p:column>
+                        <p:column><h:outputText value="R$50,00"/></p:column>
+                        <p:column><h:outputText value="Débito"/></p:column>
+                    </p:row>
+
+                </p:panelGrid>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>
+

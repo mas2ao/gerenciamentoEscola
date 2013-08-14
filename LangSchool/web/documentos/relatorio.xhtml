@@ -1,0 +1,61 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="panelHeader">Emitir Relatorio</ui:define>
+        <ui:define name="centro">
+            <h:form id="form"> 
+                <h2>Selecione o período do fluxo de caixa desejado e os atributos que devem aparecer no relatório. </h2>
+
+                <p:panelGrid>
+                    <f:facet name="header">
+                        <p:row>
+                            <p:column colspan="4">Período</p:column>
+                        </p:row>
+                    </f:facet>
+                    <p:row>
+                        <p:column style="width: 100px" colspan="2">De:</p:column>
+                        <p:column colspan="2"><p:calendar/></p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column colspan="2">Até:</p:column>
+                        <p:column colspan="2"><p:calendar/></p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column colspan="2">Tipo:</p:column>
+                        <p:column colspan="2">
+                            <div style="text-align: center">
+                                <p:selectOneMenu style="width: 200px">
+                                    <f:selectItem itemLabel="Credito"/>
+                                    <f:selectItem itemLabel="Debito"/>
+                                    <f:selectItem itemLabel="Ambos"/>
+                                </p:selectOneMenu>
+                            </div>
+                        </p:column>
+                    </p:row>
+                </p:panelGrid>
+                <br />
+                <br />
+                <p:separator/>
+                <p:commandButton value="Emitir" oncomplete="dialog.show()" />  
+                
+                <p:growl showDetail="false" id="gRelat"/>
+                
+                <p:dialog header="Emitindo Certificado" widgetVar="dialog" width="400px">
+                    <p:graphicImage value="/imagens/Relatorio.png" height="300px" width="300px"/>
+
+                    <br/>
+                    <p:separator/>
+                    <p:commandButton value="Emitir" style="color:green; width: 150px; font-size: 14px" actionListener="#{gmessages.emitir}" update="gRelat" oncomplete="dialog.hide()"/>
+                    <p:commandButton value="Cancelar" style="color: red; width: 150px; font-size: 14px; margin-left: 10px" onclick="dialog.hide()"/>
+                </p:dialog>
+            </h:form>  
+
+        </ui:define>
+    </ui:composition>
+</html>
+
