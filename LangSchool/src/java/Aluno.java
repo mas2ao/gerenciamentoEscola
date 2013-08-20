@@ -8,6 +8,4 @@
  * @author yukill
  */
 public class Aluno {
-    String Nome;
-    int idade;
 }
