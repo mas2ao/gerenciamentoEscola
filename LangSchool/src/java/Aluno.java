@@ -8,5 +8,6 @@
  * @author yukill
  */
 public class Aluno {
-	int a;    
+	int a; 
+	String nome;
 }
