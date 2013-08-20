@@ -9,7 +9,7 @@
         <ui:define name="panelHeader">Página Principal</ui:define>
         <ui:define name="centro">
             <script>
-                function sw(){
+                function sw() {
                     var wind = getElementById("dialog").visibility("false");
                 }
             </script>
@@ -23,7 +23,8 @@
                         <h:outputLabel for="password" value="Password:" />  
                         <h:inputSecret id="password"/>  
 
-                        <p:button onclick="dlg.hide(); sw();" value="Entrar"/>
+                        <p:button onclick="dlg.hide();
+                    sw();" value="Entrar"/>
                     </h:panelGrid>  
 
                 </p:dialog>
