@@ -4,8 +4,5 @@
 *.jar
 *.war
 *.ear
-/School/nbproject/private/
-/School/build/
 /LangSchool/build/
-/WebApplication1/nbproject/private/
 /LangSchool/dist/
