@@ -3,17 +3,33 @@
  * and open the template in the editor.
  */
 package com.entity;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  *
  * @author yukill
  */
+@Entity
+@Table(name = "Nota")
 public class Nota {
-
+    
+    @Id
+    @Column(name = "Id")
     private int id;
+    
+    @Column(name = "Nota 1")
     private int nota1;
+    
+    @Column(name = "Nota 2")
     private int nota2;
+    
+    @Column(name = "Nota 3")
     private int nota3;
+    
+    @Column(name = "Nota 4")
     private int nota4;
     
     
