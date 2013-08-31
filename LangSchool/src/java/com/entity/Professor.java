@@ -6,6 +6,10 @@ package com.entity;
 
 import javax.persistence.*;
 
+/**
+ *
+ * @author john
+ */
 @Entity
 @Table(name = "Professor")
 public class Professor {
@@ -15,6 +19,12 @@ public class Professor {
     
     @Column(name = "nome")
     private String nome;
+    
+    @Column(name = "email")
+    private String email;
+    
+    @Column(name = "telefone")
+    private String telefone;
     
     public Professor(){}
     
@@ -32,5 +42,21 @@ public class Professor {
     
     public String getNome(){
         return this.nome;
+    }
+    
+    public void setEmail(String email){
+        this.email = email;
+    }
+    
+    public String getEmail(){
+        return this.email;
+    }
+    
+    public void setTelefone(String telefone){
+        this.telefone = telefone;
+    }
+    
+    public String getTelefone(){
+        return this.telefone;
     }
 }

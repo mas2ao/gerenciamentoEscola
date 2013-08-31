@@ -6,6 +6,10 @@ package com.entity;
 
 import javax.persistence.*;
 
+/**
+ *
+ * @author john
+ */
 @Entity
 @Table(name = "Turma")
 public class Turma {
@@ -63,6 +67,5 @@ public class Turma {
     
     public int getVagas(){
         return this.vagas;
-    }
-    
+    }    
 }
