@@ -17,24 +17,20 @@
                         self.location = "/LangSchool/faces/index.xhtml";
                     }
                 </script>
-                <p:dialog header="Cadastrado com Sucesso!" widgetVar="confirmation">  
-                    <p:outputLabel value="Deseja cadastrar outro professor?" />
-                    <br/>
-                    <br/>
-                    <p:separator/>
-                    <p:commandButton id="confirm" value="Sim" onclick="confirmation.hide();swNew();" type="button"/>  
-                    <p:commandButton id="decline" value="Não" onclick="confirmation.hide();swBack()" type="button"/>   
-
+                <p:dialog header="Cadastrado com Sucesso!" widgetVar="confirmation">
+                    <center>
+                        <p:commandButton id="confirm" value="OK" onclick="confirmation.hide();swNew();" type="button"/>
+                    </center>
                 </p:dialog> 
                     <h:panelGrid columns="2" cellpadding="4" style="width: auto;height: 100%">
                         <h:outputText value="Nome:" />
-                        <p:inputText value="Armando Max Ilimus"/>
+                        <p:inputText id="nome" required="true" requiredMessage="Nome necessário!" value="#{gerenciarProfessor.nome}"/> 
                         <h:outputText value="Email:" />
-                        <p:inputText value="aMaxiliumus@liamtoh.moc"/>
+                        <p:inputText id="email" required="true" requiredMessage="Email necessário!" value="#{gerenciarProfessor.email}"/>
                         <h:outputText value="Telefone:" />
-                        <p:inputMask mask="(99)9999-9999"/>
+                        <p:inputText id="telefone" required="true" requiredMessage="Telefone necessário!" value="#{gerenciarProfessor.telefone}"/>
                         
-                        <p:commandButton value="Cadastrar" style="color: green" onclick="confirmation.show()"/>
+                        <p:commandButton value="Cadastrar" style="color: green" action="#{gerenciarProfessor.cadastrarProfessor}" onclick="confirmation.show()"/>
                         <p:commandButton value="Cancelar" style="color: red" onclick="swBack()"/>      
                     </h:panelGrid>
 
