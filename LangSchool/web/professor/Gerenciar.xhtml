@@ -12,122 +12,16 @@
             <h:form>
                 <h:panelGrid columns="3">
                     <h:outputText value="Nome do professor: "/>
-                    <p:inputText/>
-                    <p:commandButton value="Buscar" icon="ui-icon-search" style="color: blue"/>
+                    <p:inputText value="#{gerenciarProfessor.nome}"/>
+                    <p:commandButton value="Buscar" icon="ui-icon-search" 
+                                     action="#{gerenciarProfessor.consultarProfessor(gerenciarProfessor.nome)}"
+                                     style="color: blue" update="professores"/>
                 </h:panelGrid>
-
-
-                <p:overlayPanel id="painelcursos" for="cursos" showEffect="blind" showEvent="mousedown" hideEvent="mousedown">  
-                    <h:outputText value="Alemão" style="font-size: 14px"/>
-                </p:overlayPanel> 
-
-                <p:overlayPanel id="painelcursos2" for="cursos2" showEffect="blind" showEvent="mousedown" hideEvent="mousedown">  
-                    <h:outputText value="Inglês" style="font-size: 14px"/>
-                </p:overlayPanel>  
-                <div/>
-                <div/>
-                <br/>
-                <p:separator/>
-                <br/>
-                <p:panelGrid>
-                    <f:facet name="header">
-                        <p:row>
-                            <p:column><h:outputText value="Nome"/></p:column>
-                            <p:column><h:outputText value="Cursos"/></p:column>
-                            <p:column colspan="3"><h:outputText value="Ações"/></p:column>
-                        </p:row>
-                    </f:facet>
-                    <p:row>
-                        <p:column><h:outputText value="Armando Max Ilimus"/></p:column>          
-                        <p:column><p:commandButton id="cursos" value="Cursos" style="font-size: 14px"/> </p:column>
-                        <p:column>
-                            <div style="text-align: center">
-                                <p:commandButton value="VIZUALIZAR" style="font-size: small; font-weight: bolder" onclick="dlgViz.show()"/>
-                            </div>
-                        </p:column>
-                        <p:column>
-                            <div style="text-align: center">
-                                <p:commandButton value="ALTERAR" style="font-size: small; font-weight: bolder" onclick="dlgAlt.show()"/>
-                            </div>
-                        </p:column>
-                        <p:column>
-                            <div style="text-align: center">
-                                <p:commandButton value="REMOVER" style="color: red;font-size: small; font-weight: bolder" onclick="dlgo3.show()"/>
-                            </div>
-                        </p:column>
-                    </p:row>
-
-                    <p:row>
-                        <p:column><h:outputText value="Arlindo Souza Silva"/></p:column>
-                        <p:column><p:commandButton id="cursos2" value="Cursos" style="font-size: 14px"/> </p:column>
-                        <p:column>
-                            <div style="text-align: center">
-                                <p:commandButton value="VIZUALIZAR" style="font-size: small; font-weight: bolder" onclick="dlgViz.show()"/>
-                            </div>
-                        </p:column>
-                        <p:column>
-                            <div style="text-align: center">
-                                <p:commandButton value="ALTERAR" style="font-size: small; font-weight: bolder"/>
-                            </div>
-                        </p:column>
-                        <p:column>
-                            <div style="text-align: center">
-                                <p:commandButton value="REMOVER" style="color: red;font-size: small; font-weight: bolder" />
-                            </div>
-                        </p:column>
-                    </p:row>
-
-                </p:panelGrid>
-
-                <p:growl showDetail="false" id="gProfessor"/>
-
-                <p:dialog header="Visualizar Professor" widgetVar="dlgViz" >
-
-                    <h:panelGrid columns="2">
-                        <h:outputText value="Nome:" />
-                        <h:outputText value="Armando Max Ilimus" />
-                        <h:outputText value="Email:" />
-                        <h:outputText value="aMaxiliumus@liamtoh.moc" />
-                        <h:outputText value="Telefone:" />
-                        <h:outputText value="(45)9823-1932" />
-                    </h:panelGrid>
-
-                </p:dialog>
-
-                <p:dialog widgetVar="dlgAlt" header="Alterar Professor">
-                    <h:panelGrid columns="2">
-                        <h:outputText value="Nome:" />
-                        <h:inputText value="Armando Max Ilimus" />
-                        <h:outputText value="Email:" />
-                        <h:inputText value="aMaxiliumus@liamtoh.moc" />
-                        <h:outputText value="Telefone:" />
-                        <p:inputMask value="(45)9823-1932" mask="(99)9999-9999"/>
-                    </h:panelGrid>
-                    <br/>
-                    <br/>
-                    <p:separator/>
-                    <br/>  
-                    <p:commandButton value="CANCELAR" ajax="true" style="color: red; font-weight: bolder; font-size: small" onclick="dlgAlt.hide()"/>
-                    <p:commandButton value="SALVAR" ajax="true" style="color: green; font-weight: bolder; font-size: small; margin-left: 10px" actionListener="#{gmessages.alterar}" update="gProfessor" oncomplete="dlgAlt.hide()" />
-                </p:dialog>
-                <p:dialog header="Remover" widgetVar="dlgo3">
-                    <h:outputText value="Tem certeza que deseja remover este professor?" style="font-size: large; color: red" />
-                    <br/>
-                    <p:separator/>
-                    <br/>
-                    <h:panelGrid columns="2" style="width: 100%">
-                        <p:column colspan="20">
-                            <div style="text-align: center">
-                                <p:commandButton value="SIM" style="color: green; font-weight: bolder" actionListener="#{gmessages.remover}" update="gProfessor" oncomplete="dlgo3.hide()"/>
-                            </div>
-                        </p:column>
-                        <p:column colspan="20">
-                            <div style="text-align: center">
-                                <p:commandButton value="NÃO" style="color: red; font-weight: bolder" onclick="dlgo3.hide()"/>
-                            </div>
-                        </p:column>                        
-                    </h:panelGrid>
-                </p:dialog>
+                
+                <p:dataList id="professores" value="#{gerenciarProfessor.professores}" var="prof">
+                    #{prof.nome}, #{prof.email}
+                </p:dataList>
+            
             </h:form>
         </ui:define>
     </ui:composition>

@@ -5,6 +5,7 @@
 package gerenciamento;
 
 import com.entity.Professor;
+import java.util.List;
 import javax.faces.bean.ManagedBean;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -22,6 +23,7 @@ public class GerenciarProfessor {
     private String nome;
     private String email;
     private String telefone;
+    private List<Professor> professores;
     
     private SessionFactory configure(){
         return new AnnotationConfiguration().configure().
@@ -52,6 +54,10 @@ public class GerenciarProfessor {
         return this.telefone;
     }
     
+    public List<Professor> getProfessores(){
+        return this.professores;
+    }
+    
     public void cadastrarProfessor(){
         Session session = factory.openSession();
         Transaction tx = null;
@@ -71,10 +77,26 @@ public class GerenciarProfessor {
         }
     }
     
-    public void excluirProfessor(){
+    public void consultarProfessor(String nome){
+        Session session = factory.openSession();
+        Transaction tx = null;
+        try{
+            tx = session.beginTransaction();
+            String query = "SELECT * FROM Professor WHERE nome LIKE '%"
+                    +nome+"%'";
+            professores = session.createSQLQuery(query).
+                    addEntity(Professor.class).list();
+            for(Professor prof: professores){
+                System.out.println(prof.getNome());
+            }
+            tx.commit();
+        } catch (HibernateException ex){
+            if (tx != null) tx.rollback();
+            ex.printStackTrace();
+        } finally {
+            session.close();
+        }
     }
     
-    public void consultarProfessor(){
-        
-    }
+    public void excluirProfessor(int id){}
 }

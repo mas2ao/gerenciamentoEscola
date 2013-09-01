@@ -24,13 +24,18 @@
                 </p:dialog> 
                     <h:panelGrid columns="2" cellpadding="4" style="width: auto;height: 100%">
                         <h:outputText value="Nome:" />
-                        <p:inputText id="nome" required="true" requiredMessage="Nome necessário!" value="#{gerenciarProfessor.nome}"/> 
-                        <h:outputText value="Email:" />
-                        <p:inputText id="email" required="true" requiredMessage="Email necessário!" value="#{gerenciarProfessor.email}"/>
-                        <h:outputText value="Telefone:" />
-                        <p:inputText id="telefone" required="true" requiredMessage="Telefone necessário!" value="#{gerenciarProfessor.telefone}"/>
+                        <p:inputText id="nome" value="#{gerenciarProfessor.nome}"/> 
                         
-                        <p:commandButton value="Cadastrar" style="color: green" action="#{gerenciarProfessor.cadastrarProfessor}" onclick="confirmation.show()"/>
+                        <h:outputText value="Email:" />
+                        <p:inputText id="email" value="#{gerenciarProfessor.email}"/>
+                        
+                        <h:outputText value="Telefone:" />
+                        <p:inputText id="telefone" value="#{gerenciarProfessor.telefone}"/>
+                        
+                        <p:commandButton value="Cadastrar" style="color: green"
+                                         action="#{gerenciarProfessor.cadastrarProfessor}" 
+                                         onclick="confirmation.show()"/>
+                        
                         <p:commandButton value="Cancelar" style="color: red" onclick="swBack()"/>      
                     </h:panelGrid>
 
@@ -39,4 +44,3 @@
         </ui:define>
     </ui:composition>
 </html>
-
