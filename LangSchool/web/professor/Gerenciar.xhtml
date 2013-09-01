@@ -17,11 +17,27 @@
                                      action="#{gerenciarProfessor.consultarProfessor(gerenciarProfessor.nome)}"
                                      style="color: blue" update="professores"/>
                 </h:panelGrid>
-                
-                <p:dataList id="professores" value="#{gerenciarProfessor.professores}" var="prof">
-                    #{prof.nome}, #{prof.email}
-                </p:dataList>
-            
+
+                <p:separator/>
+
+                <p:dataTable id="professores" var="prof" value="#{gerenciarProfessor.professores}" 
+                             style="width:800px" emptyMessage="Nenhum dado encontrado.">
+                    <p:column headerText="Nome">
+                        <h:outputText value="#{prof.nome}" style="font-size: small; font-weight: bolder"/>
+                    </p:column>
+
+                    <p:column headerText="Cursos">
+                        <center><p:commandButton value="Cursos" style="font-size: small; font-weight: bolder"/></center>
+                    </p:column>
+
+                    <p:column headerText="Ações">
+                        <center><p:commandButton value="VIZUALIZAR" style="font-size: small; font-weight: bolder" onclick="dlgViz.show()"/>
+                        <p:commandButton value="ALTERAR" style="font-size: small; font-weight: bolder" onclick="dlgAlt.show()"/>
+                        <p:commandButton value="REMOVER" style="color: red;font-size: small; font-weight: bolder" onclick="dlgo3.show()"/>        
+                        </center>
+                    </p:column>
+                </p:dataTable>
+
             </h:form>
         </ui:define>
     </ui:composition>
