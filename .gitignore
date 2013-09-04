@@ -6,3 +6,4 @@
 *.ear
 /LangSchool/build/
 /LangSchool/dist/
+/LangSchool/nbproject/private/
