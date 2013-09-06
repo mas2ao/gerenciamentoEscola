@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.entity;
 
 import javax.persistence.Column;
@@ -10,10 +6,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-/**
- *
- * @author rod
- */
 @Entity
 @Table(name = "ALUNO")
 public class Aluno {
