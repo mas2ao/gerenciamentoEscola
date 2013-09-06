@@ -1,31 +1,54 @@
 package com.entity;
 
+import java.util.ArrayList;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "ALUNO")
+@Table(name = "aluno")
 public class Aluno {
+    
     @Id@GeneratedValue
-    @Column(name = "codigo") private int codigo;
-    @Column(name = "nome") private String nome;
-    @Column(name = "dataNasc") private String dataNasc;
-    @Column(name = "idade") private int idade;
-    @Column(name = "rg") private int rg;
-    @Column(name = "nomePai") private String nomePai;
-    @Column(name = "nomeMae") private String nomeMae;
-    @Column(name = "telefone") private int telefone;
-    @Column(name = "complemento") private String complemento;
+    @Column(name = "id")
+    private int id;
 
-    public int getCodigo() {
-        return codigo;
+    @OneToMany(mappedBy = "aluno")
+    private ArrayList<Matricula> matricula;
+    
+    @Column(name = "nome")
+    private String nome;
+    
+    @Column(name = "data_nasc")
+    private String dataNasc;
+    
+    @Column(name = "idade")
+    private int idade;
+    
+    @Column(name = "rg")
+    private int rg;
+    
+    @Column(name = "nome_pai")
+    private String nomePai;
+    
+    @Column(name = "nome_mae")
+    private String nomeMae;
+    
+    @Column(name = "telefone")
+    private int telefone;
+    
+    @Column(name = "complemento")
+    private String complemento;
+
+    public int getId() {
+        return id;
     }
 
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNome() {

@@ -8,20 +8,27 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "FLUXOCAIXA")
+@Table(name = "fluxocaixa")
 public class FluxoCaixa {
     @Id@GeneratedValue
-    @Column(name = "codfluxo") private int codFluxo;
-    @Column(name = "descricao") private String descricao;
-    @Column(name = "valor") private float valor;
-    @Column(name = "dataMovimento") private String data;
+    @Column(name = "id")
+    private int id;
+    
+    @Column(name = "descricao")
+    private String descricao;
+    
+    @Column(name = "valor")
+    private float valor;
+    
+    @Column(name = "data_movimento")
+    private String data;
 
-    public int getCodFluxo() {
-        return codFluxo;
+    public int getId() {
+        return id;
     }
 
-    public void setCodFluxo(int codFluxo) {
-        this.codFluxo = codFluxo;
+    public void setCodFluxo(int id) {
+        this.id = id;
     }
 
     public String getDescricao() {
