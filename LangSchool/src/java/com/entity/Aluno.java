@@ -18,6 +18,14 @@ public class Aluno {
 
     @OneToMany(mappedBy = "aluno")
     private ArrayList<Matricula> matricula;
+
+    public ArrayList<Matricula> getMatricula() {
+        return matricula;
+    }
+
+    public void setMatricula(ArrayList<Matricula> matricula) {
+        this.matricula = matricula;
+    }
     
     @Column(name = "nome")
     private String nome;
