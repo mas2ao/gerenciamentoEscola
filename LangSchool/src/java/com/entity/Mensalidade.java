@@ -8,25 +8,35 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 
 /**
  *
- * @author yukill
+ * @author massao
  */
 @Entity
-@Table(name = "Mensalidade")
+@Table(name = "mensalidade")
 public class Mensalidade {
 
     @Id
-    @Column(name = "Id")
+    @OneToOne
+    @JoinColumn(name = "id_mensalidade")
     private int id;
-    @Column(name = "Valor")
+    
+    @OneToOne
+    @Column(name = "valor")
     private float valorMensalidade;
-    @Column(name = "Situacao")
+    
+    @OneToOne
+    @Column(name = "situacao")
     private boolean situMensalidade;
-    @Column(name = "Mes")
+    
+    @OneToMany
+    @Column(name = "mes")
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date mes;
     

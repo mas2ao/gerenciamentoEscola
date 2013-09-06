@@ -3,33 +3,41 @@
  * and open the template in the editor.
  */
 package com.entity;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
  *
- * @author yukill
+ * @author massao
  */
 @Entity
-@Table(name = "Nota")
+@Table(name = "nota")
 public class Nota {
     
     @Id
-    @Column(name = "Id")
+    @OneToOne
+    @JoinColumn(name = "id_nota")
     private int id;
     
-    @Column(name = "Nota 1")
+    @OneToOne
+    @Column(name = "nota_1")
     private int nota1;
     
-    @Column(name = "Nota 2")
+    @OneToOne
+    @Column(name = "nota_2")
     private int nota2;
     
-    @Column(name = "Nota 3")
+    @OneToOne
+    @Column(name = "nota_3")
     private int nota3;
     
-    @Column(name = "Nota 4")
+    @OneToOne
+    @Column(name = "nota_4")
     private int nota4;
     
     
