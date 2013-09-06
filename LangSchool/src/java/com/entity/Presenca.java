@@ -8,28 +8,32 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 
 /**
  *
- * @author yukill
+ * @author massao
  */
 @Entity
-@Table(name = "Presenca")
+@Table(name = "presenca")
 public class Presenca {
     
     @Id
-    @Column(name = "Id")
+    @OneToOne
+    @JoinColumn(name = "id_presenca")
     private int id;
     
-    @Column(name = "Data")
+    @OneToOne
+    @Column(name = "data")
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date data;
     
     public int getId(){
         return id;
-    }
+}
     public Date getData(){
         return data;
     }
