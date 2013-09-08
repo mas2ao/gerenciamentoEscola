@@ -11,11 +11,19 @@ import javax.persistence.*;
  * @author john
  */
 @Entity
-@Table(name = "Turma")
+@Table(name = "turma")
 public class Turma {
-    @Id
+    @Id @GeneratedValue
     @Column (name = "id")
     private int id;
+    
+    @ManyToOne
+    @JoinColumn(name = "id_professor")
+    private Professor professor;
+    
+    @ManyToOne
+    @JoinColumn(name = "id_nivel")
+    private Nivel nivel;
     
     @Column (name = "codigo")
     private int codigo;
@@ -35,6 +43,22 @@ public class Turma {
     
     public int getId(){
         return this.id;
+    }
+    
+    public void setNivel(Nivel nivel){
+        this.nivel = nivel;
+    }
+    
+    public Nivel getNivel(){
+        return this.nivel;
+    }
+    
+    public void setProfessor(Professor professor){
+        this.professor = professor;
+    }
+    
+    public Professor getProfessor(){
+        return this.professor;
     }
     
     public void setCodigo(int codigo){
