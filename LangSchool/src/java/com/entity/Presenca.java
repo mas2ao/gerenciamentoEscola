@@ -4,14 +4,8 @@
  */
 package com.entity;
 
-import java.util.Date;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
+import java.io.Serializable;
+import javax.persistence.*;
 
 /**
  *
@@ -19,22 +13,23 @@ import javax.persistence.Temporal;
  */
 @Entity
 @Table(name = "presenca")
-public class Presenca {
+public class Presenca implements Serializable {
     
     @Id
-    @OneToOne
-    @JoinColumn(name = "id_presenca")
+    @GeneratedValue
     private int id;
     
-    @OneToOne
     @Column(name = "data")
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date data;
+    private String data;
+    
+    @ManyToOne
+    @JoinColumn(name = "id_matricula")
+    private Matricula matricula;
     
     public int getId(){
         return id;
 }
-    public Date getData(){
+    public String getData(){
         return data;
     }
     

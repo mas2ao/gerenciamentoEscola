@@ -4,15 +4,8 @@
  */
 package com.entity;
 
-import java.util.Date;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
+import java.io.Serializable;
+import javax.persistence.*;
 
 /**
  *
@@ -20,25 +13,24 @@ import javax.persistence.Temporal;
  */
 @Entity
 @Table(name = "mensalidade")
-public class Mensalidade {
+public class Mensalidade implements Serializable {
 
     @Id
-    @OneToOne
-    @JoinColumn(name = "id_mensalidade")
+    @GeneratedValue
     private int id;
     
-    @OneToOne
     @Column(name = "valor")
     private float valorMensalidade;
     
-    @OneToOne
     @Column(name = "situacao")
     private boolean situMensalidade;
     
-    @OneToMany
     @Column(name = "mes")
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date mes;
+    private String mes;
+    
+    @ManyToOne
+    @JoinColumn(name = "id_matricula")
+    private Matricula matricula;
     
     public int getId(){
         return id;
@@ -55,11 +47,11 @@ public class Mensalidade {
         this.situMensalidade = situMensalidade;
     }
 
-    public Date getMes() {
+    public String getMes() {
         return mes;
     }
 
-    public void setMes(Date mes) {
+    public void setMes(String mes) {
         this.mes = mes;
     }
     

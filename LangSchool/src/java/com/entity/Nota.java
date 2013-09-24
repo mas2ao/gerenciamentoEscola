@@ -4,12 +4,8 @@
  */
 package com.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import java.io.Serializable;
+import javax.persistence.*;
 
 /**
  *
@@ -17,26 +13,21 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "nota")
-public class Nota {
+public class Nota implements Serializable {
     
     @Id
-    @OneToOne
-    @JoinColumn(name = "id_nota")
+    @GeneratedValue
     private int id;
     
-    @OneToOne
     @Column(name = "nota_1")
     private int nota1;
     
-    @OneToOne
     @Column(name = "nota_2")
     private int nota2;
     
-    @OneToOne
     @Column(name = "nota_3")
     private int nota3;
     
-    @OneToOne
     @Column(name = "nota_4")
     private int nota4;
     

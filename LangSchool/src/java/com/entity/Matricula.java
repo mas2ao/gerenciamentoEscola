@@ -1,7 +1,7 @@
 package com.entity;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.Set;
 import javax.persistence.*;
         
 @Entity
@@ -27,13 +27,13 @@ public class Matricula implements Serializable {
     private String dataMatricula;
     
     @OneToMany(mappedBy = "matricula")
-    private ArrayList<Presenca> presenca;
+    private Set<Presenca> presenca;
     
     @OneToMany(mappedBy = "matricula")
-    private ArrayList<Mensalidade> mensalidade;
+    private Set<Mensalidade> mensalidade;
     
     @OneToMany(mappedBy = "matricula")
-    private ArrayList<ReposicaoAula> reposicoes;
+    private Set<ReposicaoAula> reposicoes;
 
     public int getId() {
         return id;
