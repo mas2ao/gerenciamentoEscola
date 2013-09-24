@@ -7,6 +7,17 @@
     <property name="hibernate.connection.url">jdbc:mysql://localhost/gerenciamentoEscola</property>
     <property name="hibernate.connection.username">root</property>
     <property name="hibernate.connection.password">123</property>
+    <property name="hibernate.hbm2ddl.auto">update</property>
+    <mapping class="com.entity.Aluno"/>
+    <mapping class="com.entity.Curso"/>
+    <mapping class="com.entity.FluxoCaixa"/>
+    <mapping class="com.entity.LogIn"/>
+    <mapping class="com.entity.Matricula"/>
+    <mapping class="com.entity.Mensalidade"/>
+    <mapping class="com.entity.Nivel"/>
+    <mapping class="com.entity.Nota"/>
+    <mapping class="com.entity.Presenca"/>
+    <mapping class="com.entity.ReposicaoAula"/>
     <mapping class="com.entity.Professor"/>
     <mapping class="com.entity.Turma"/>
   </session-factory>

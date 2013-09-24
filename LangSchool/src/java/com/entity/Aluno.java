@@ -1,6 +1,7 @@
 package com.entity;
 
-import java.util.ArrayList;
+import java.io.Serializable;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,20 +11,20 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "aluno")
-public class Aluno {
+public class Aluno implements Serializable {
     
     @Id@GeneratedValue
     @Column(name = "id")
     private int id;
 
     @OneToMany(mappedBy = "aluno")
-    private ArrayList<Matricula> matricula;
+    private Set<Matricula> matricula;
 
-    public ArrayList<Matricula> getMatricula() {
+    public Set<Matricula> getMatricula() {
         return matricula;
     }
 
-    public void setMatricula(ArrayList<Matricula> matricula) {
+    public void setMatricula(Set<Matricula> matricula) {
         this.matricula = matricula;
     }
     

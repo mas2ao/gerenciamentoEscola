@@ -1,7 +1,7 @@
 package com.entity;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.Set;
 import javax.persistence.*;
 
 @Entity
@@ -17,7 +17,7 @@ public class Curso implements Serializable {
     @Column(name = "descricao")
     private String descricao;
     @OneToMany(mappedBy="curso")
-    private ArrayList<Nivel> niveis;
+    private Set<Nivel> niveis;
     
     public int getId() {
         return id;
