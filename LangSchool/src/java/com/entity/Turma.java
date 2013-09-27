@@ -11,7 +11,7 @@ import javax.persistence.*;
  * @author john
  */
 @Entity
-@Table(name = "turma")
+@Table(name = "Turma")
 public class Turma {
     @Id @GeneratedValue
     @Column (name = "id")

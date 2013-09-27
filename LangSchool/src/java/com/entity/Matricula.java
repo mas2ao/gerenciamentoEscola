@@ -5,7 +5,7 @@ import java.util.Set;
 import javax.persistence.*;
         
 @Entity
-@Table(name = "matricula")
+@Table(name = "Matricula")
 public class Matricula implements Serializable {
     @Id
     @GeneratedValue
