@@ -13,7 +13,8 @@ import javax.persistence.*;
 @Entity
 @Table(name = "Turma")
 public class Turma {
-    @Id @GeneratedValue
+    @Id 
+    @GeneratedValue
     @Column (name = "id")
     private int id;
     
