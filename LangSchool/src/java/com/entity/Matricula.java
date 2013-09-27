@@ -1,6 +1,7 @@
 package com.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Set;
 import javax.persistence.*;
         
@@ -24,7 +25,8 @@ public class Matricula implements Serializable {
     private Nota notas;
     
     @Column(name = "data_matricula")
-    private String dataMatricula;
+    @Temporal(TemporalType.DATE)
+    private Date dataMatricula;
     
     @OneToMany(mappedBy = "matricula")
     private Set<Presenca> presenca;
@@ -62,11 +64,11 @@ public class Matricula implements Serializable {
         this.turma = turma;
     }
 
-    public String getDataMatricula() {
+    public Date getDataMatricula() {
         return dataMatricula;
     }
 
-    public void setDataMatricula(String dataMatricula) {
+    public void setDataMatricula(Date dataMatricula) {
         this.dataMatricula = dataMatricula;
     }
     

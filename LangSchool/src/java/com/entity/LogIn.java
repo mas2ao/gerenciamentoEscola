@@ -15,6 +15,9 @@ public class LogIn {
     @OneToOne
     @JoinColumn(name = "id_professor")
     private Professor professor;
+    
+    @Column(name = "estado")
+    private String estado;
 
     public int getId() {
         return id;
@@ -34,6 +37,15 @@ public class LogIn {
 
     public void setProfessor(Professor professor) {
         this.professor = professor;
+    }
+    
+    public String getEstado() {
+        return this.estado;
+    }
+    
+    public void alteraEstado() {
+        if(this.estado.equals("inativo")) this.estado = "ativo";
+        this.estado = "inativo";
     }
     
 }
