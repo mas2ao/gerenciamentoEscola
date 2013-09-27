@@ -8,6 +8,8 @@ import com.entity.Professor;
 import com.hibernate.HibernateUtil;
 import com.persist.EntityPersist;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -58,7 +60,11 @@ public class GerenciarProfessor {
         professor.setNome(nome);
         professor.setEmail(email);
         professor.setTelefone(telefone);
-        ep.save(professor);
+        try {
+            ep.save(professor);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
     
     public void consultarProfessor(String nome){
