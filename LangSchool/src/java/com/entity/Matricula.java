@@ -23,7 +23,7 @@ public class Matricula implements Serializable {
     @JoinColumn(name = "id_nota")
     private Nota notas;
     
-    @Column
+    @Column(name = "data_matricula")
     private String dataMatricula;
     
     @OneToMany(mappedBy = "matricula")
@@ -35,6 +35,9 @@ public class Matricula implements Serializable {
     @OneToMany(mappedBy = "matricula")
     private Set<ReposicaoAula> reposicoes;
 
+    @Column(name = "estado")
+    private String estado;
+    
     public int getId() {
         return id;
     }
@@ -67,4 +70,12 @@ public class Matricula implements Serializable {
         this.dataMatricula = dataMatricula;
     }
     
+    public String getEstado() {
+        return this.estado;
+    }
+    
+    public void alteraEstado() {
+        if(this.estado.equals("inativo")) this.estado = "ativo";
+        this.estado = "inativo";
+    }
 }

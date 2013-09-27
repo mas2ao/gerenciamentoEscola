@@ -7,13 +7,9 @@ package gerenciamento;
 import com.entity.Professor;
 import com.hibernate.HibernateUtil;
 import com.persist.EntityPersist;
+import com.util.CriteriaGroup;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 
 /**
  *
@@ -68,24 +64,8 @@ public class GerenciarProfessor {
     }
     
     public void consultarProfessor(String nome){
-        Session session = HibernateUtil.getSession();
-        Transaction tx = null;
-        try{
-            tx = session.beginTransaction();
-            String query = "SELECT * FROM Professor WHERE nome LIKE '%"
-                    +nome+"%'";
-            professores = session.createSQLQuery(query).
-                    addEntity(Professor.class).list();
-            for(Professor prof: professores){
-                System.out.println(prof.getNome());
-            }
-            tx.commit();
-        } catch (HibernateException ex){
-            if (tx != null) tx.rollback();
-            ex.printStackTrace();
-        } finally {
-            session.close();
-        }
+        professores = ep.search(Professor.class, 
+                new CriteriaGroup("like", "nome", nome, null));
     }
     
     public void excluirProfessor(int id){}
