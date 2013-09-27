@@ -1,9 +1,8 @@
 package com.persist;
 
+import com.entity.*;
 import com.hibernate.HibernateUtil;
 import java.lang.reflect.Method;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.hibernate.*;
 
 public class EntityPersist {
@@ -22,10 +21,10 @@ public class EntityPersist {
         Method method = null;
         try {
             method = EntityPersist.class.getMethod(meth, types);
-        } catch (NoSuchMethodException ex) {
-            Logger.getLogger(EntityPersist.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
         } catch (SecurityException ex) {
-            Logger.getLogger(EntityPersist.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
         return method;
     }
@@ -54,5 +53,33 @@ public class EntityPersist {
 
     public String save(Object obj) throws Exception {
         return doSerialize(obj, createMethod("saveFunction", obj.getClass()));
+    }
+    
+    private void delFunction(Object obj) {
+        session.delete(obj);
+    }
+    
+    public String delete(Object obj) throws Exception {
+        return doSerialize(obj, createMethod("delFunction", obj.getClass()));
+    }
+    
+    private void updateFunction(Object obj) {
+        if(obj instanceof Aluno) obj = (Aluno) session.merge(obj);
+        if(obj instanceof Curso) obj = (Curso) session.merge(obj);
+        if(obj instanceof FluxoCaixa) obj = (FluxoCaixa) session.merge(obj);
+        if(obj instanceof LogIn) obj = (LogIn) session.merge(obj);
+        if(obj instanceof Matricula) obj = (Matricula) session.merge(obj);
+        if(obj instanceof Mensalidade) obj = (Mensalidade) session.merge(obj);
+        if(obj instanceof Nivel) obj = (Nivel) session.merge(obj);
+        if(obj instanceof Nota) obj = (Nota) session.merge(obj);
+        if(obj instanceof Presenca) obj = (Presenca) session.merge(obj);
+        if(obj instanceof Professor) obj = (Professor) session.merge(obj);
+        if(obj instanceof ReposicaoAula) obj = (ReposicaoAula) session.merge(obj);
+        if(obj instanceof Turma) obj = (Turma) session.merge(obj);
+        session.update(obj);
+    }
+    
+    public String update(Object obj) throws Exception {
+        return doSerialize(obj, createMethod("updateFunction", obj.getClass()));
     }
 }
