@@ -31,6 +31,9 @@ public class Nota implements Serializable {
     @Column(name = "nota_4")
     private int nota4;
     
+    @Column(name = "estado")
+    private String estado;
+    
     
    public int getId(){
        return id;
@@ -68,5 +71,13 @@ public class Nota implements Serializable {
        this.nota4 = nota4;
    }
    
+   public void alteraEstado(String estado){
+       if (this.estado.equals("inativo")) this.estado = "ativo";
+       this.estado = "inativo";
+   }
+   
+   public String getEstado(){
+       return estado;
+   }
    
 }
