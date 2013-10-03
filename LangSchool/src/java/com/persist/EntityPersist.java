@@ -1,6 +1,5 @@
 package com.persist;
 
-import com.entity.*;
 import com.hibernate.HibernateUtil;
 import com.util.CriteriaGroup;
 import java.lang.reflect.Method;
@@ -74,18 +73,6 @@ public class EntityPersist {
     
     //Para fazer update
     private void updateFunction(Object obj) {
-        if(obj instanceof Aluno) obj = (Aluno) session.merge(obj);
-        if(obj instanceof Curso) obj = (Curso) session.merge(obj);
-        if(obj instanceof FluxoCaixa) obj = (FluxoCaixa) session.merge(obj);
-        if(obj instanceof LogIn) obj = (LogIn) session.merge(obj);
-        if(obj instanceof Matricula) obj = (Matricula) session.merge(obj);
-        if(obj instanceof Mensalidade) obj = (Mensalidade) session.merge(obj);
-        if(obj instanceof Nivel) obj = (Nivel) session.merge(obj);
-        if(obj instanceof Nota) obj = (Nota) session.merge(obj);
-        if(obj instanceof Presenca) obj = (Presenca) session.merge(obj);
-        if(obj instanceof Professor) obj = (Professor) session.merge(obj);
-        if(obj instanceof ReposicaoAula) obj = (ReposicaoAula) session.merge(obj);
-        if(obj instanceof Turma) obj = (Turma) session.merge(obj);
         session.update(obj);
     }
     
