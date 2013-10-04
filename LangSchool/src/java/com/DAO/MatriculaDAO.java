@@ -1,25 +1,40 @@
 package com.DAO;
 
 import com.entity.Matricula;
-import com.persist.EntityPersist;
 
-public class MatriculaDAO {
-    private EntityPersist ep;
+public class MatriculaDAO extends DAO{
+    private Matricula matricula;
     
-    public String matricular(Matricula mat) {
+    @Override
+    public String incluir(Object obj) {
+        matricula = (Matricula) obj;
         try {
-            ep.save(mat);
+            ep.save(matricula);
         } catch (Exception ex) {
             ex.printStackTrace();
             return "fail";
         }
         return "success";
     }
-    
-    public String removerMatricula(Matricula mat) {
+
+    @Override
+    public String excluir(Object obj) {
+        matricula = (Matricula) obj;
         try {
-            mat.alteraEstado();
-            ep.update(mat);
+            matricula.alteraEstado();
+            ep.update(matricula);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return "fail";
+        }
+        return "success";
+    }
+
+    @Override
+    public String alterar(Object obj) {
+        matricula = (Matricula) obj;
+        try {
+            ep.update(matricula);
         } catch (Exception ex) {
             ex.printStackTrace();
             return "fail";

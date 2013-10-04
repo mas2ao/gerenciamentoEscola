@@ -25,7 +25,7 @@ public class EntityPersist {
     private Method createMethod(String meth, Class<?>... types) {
         Method method = null;
         try {
-            method = EntityPersist.class.getMethod(meth, types);
+            method = EntityPersist.class.getDeclaredMethod(meth, types);
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         } catch (SecurityException ex) {
@@ -39,7 +39,7 @@ public class EntityPersist {
         init();
         try {
             tx = session.beginTransaction();
-            method.invoke(EntityPersist.class, obj);
+            method.invoke(this, obj);
             tx.commit();
         } catch (HibernateException e) {
             if (tx != null) {
@@ -59,7 +59,7 @@ public class EntityPersist {
     }
 
     public String save(Object obj) throws Exception {
-        return doSerialize(obj, createMethod("saveFunction", obj.getClass()));
+        return doSerialize(obj, createMethod("saveFunction", Object.class));
     }
     
     //Para deletar
@@ -68,7 +68,7 @@ public class EntityPersist {
     }
     
     public String delete(Object obj) throws Exception {
-        return doSerialize(obj, createMethod("delFunction", obj.getClass()));
+        return doSerialize(obj, createMethod("delFunction", Object.class));
     }
     
     //Para fazer update
@@ -77,7 +77,7 @@ public class EntityPersist {
     }
     
     public String update(Object obj) throws Exception {
-        return doSerialize(obj, createMethod("updateFunction", obj.getClass()));
+        return doSerialize(obj, createMethod("updateFunction", Object.class));
     }
     
     public List search(Class cName, CriteriaGroup... addCrit) {
