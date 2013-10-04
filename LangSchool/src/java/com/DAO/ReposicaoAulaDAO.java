@@ -1,14 +1,13 @@
 package com.DAO;
 
 import com.entity.ReposicaoAula;
-import com.persist.EntityPersist;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-public class ReposicaoAulaDAO {
-    private EntityPersist ep;
-    
-    public String incluirReposicao(ReposicaoAula repAula) {
+public class ReposicaoAulaDAO extends DAO{
+
+    @Override
+    public String incluir(Object obj) {
+        ReposicaoAula repAula;
+        repAula = (ReposicaoAula) obj;
         try {
             ep.save(repAula);
         } catch (Exception ex) {
@@ -16,5 +15,10 @@ public class ReposicaoAulaDAO {
             return "fail";
         }
         return "success";
+    }
+
+    @Override
+    public String excluir(Object obj) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
