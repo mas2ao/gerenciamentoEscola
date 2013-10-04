@@ -1,16 +1,15 @@
 package com.DAO;
 
-import com.entity.ReposicaoAula;
+import com.entity.LogIn;
 
-public class ReposicaoAulaDAO extends DAO {
-
-    private ReposicaoAula repAula;
-
+public class LogInDAO extends DAO {
+    private LogIn login;
+    
     @Override
     public String incluir(Object obj) {
-        repAula = (ReposicaoAula) obj;
+        login = (LogIn) obj;
         try {
-            ep.save(repAula);
+            ep.save(login);
         } catch (Exception ex) {
             ex.printStackTrace();
             return "fail";
@@ -20,9 +19,9 @@ public class ReposicaoAulaDAO extends DAO {
 
     @Override
     public String excluir(Object obj) {
-        repAula = (ReposicaoAula) obj;
+        login = (LogIn) obj;
         try {
-            ep.delete(repAula);
+            ep.delete(login);
         } catch (Exception ex) {
             ex.printStackTrace();
             return "fail";
@@ -32,13 +31,14 @@ public class ReposicaoAulaDAO extends DAO {
 
     @Override
     public String alterar(Object obj) {
-        repAula = (ReposicaoAula) obj;
+        login = (LogIn) obj;
         try {
-            ep.update(repAula);
+            ep.update(login);
         } catch (Exception ex) {
             ex.printStackTrace();
             return "fail";
         }
         return "success";
     }
+    
 }
