@@ -8,7 +8,7 @@ import org.hibernate.*;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 
-public class EntityPersist {
+public class EntityPersist extends HibernateUtil {
 
     private Session session;
     private Transaction tx;
@@ -22,6 +22,7 @@ public class EntityPersist {
     }
     
     //Cria um tipo metodo da funcao "meth"
+    //A var "method" ira "apontar" para a funcao com o nome "meth"
     private Method createMethod(String meth, Class<?>... types) {
         Method method = null;
         try {
