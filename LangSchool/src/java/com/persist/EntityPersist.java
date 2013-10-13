@@ -104,4 +104,9 @@ public class EntityPersist extends HibernateUtil {
         if(cg.type.equals("sql")) return Restrictions.sqlRestriction(cg.attribute);
         return null;
     }
+    
+    public void updateDb() {
+        init();
+        session.close();
+    }
 }
