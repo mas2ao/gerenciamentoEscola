@@ -31,17 +31,6 @@ public class GerenciamentoAluno {
     }
     
     public void cadastrarAluno(ActionEvent ae) {
-        /*
-        if(aluno.getNomePai().equals("") && aluno.getNomeMae().equals("")) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Expecifique um responsavel!", null));
-            return;
-        } else if (aluno.getNomePai().equals("") && aluno.getTelefonePai().equals("")) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Caracteristicas do Pai inconsistentes!", null));
-            return;
-        } else if (aluno.getNomeMae().equals("") && aluno.getTelefoneMae().equals("")) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Expecifique um responsavel!", null));
-        }
-        */
         try {
             ep.save(aluno);
         } catch (Exception ex) {

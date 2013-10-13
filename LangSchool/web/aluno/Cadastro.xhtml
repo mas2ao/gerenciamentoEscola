@@ -93,7 +93,7 @@
                     <p:inputText id="inputCidade" value="#{gerenciamentoAluno.aluno.cidade}" required="true"/>
                     <p:message for="inputCidade" display="icon"/>
                     
-                    <h:outputText value="Endereço:" />
+                    <h:outputText value="Endereço *:" />
                     <p:inputText id="inputEnd" required="true" value="#{gerenciamentoAluno.aluno.endereco}"/>
                     <p:message for="inputEnd" display="icon"/>
                     
@@ -119,7 +119,7 @@
                 </h:panelGrid>
 
                 <h:panelGrid columns="2">
-                    <p:commandButton value="Salvar" style="color: green" actionListener="#{gerenciamentoAluno.cadastrarAluno}" update="panel" onsuccess="confirmation.show()"/>
+                    <p:commandButton value="Salvar" style="color: green" actionListener="#{gerenciamentoAluno.cadastrarAluno}" update="panel" oncomplete="confirmation.show()"/>
                     <p:commandButton value="Cancelar" style="color: red" onclick="swBack()"/>      
                 </h:panelGrid>
             </h:form>
