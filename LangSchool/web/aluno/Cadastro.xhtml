@@ -27,25 +27,37 @@
                     <p:commandButton id="decline" value="Não" onclick="confirmation.hide();swBack()" type="button"/>   
 
                 </p:dialog> 
-                
-                <h:panelGrid columns="4" cellpadding="5">
-                    <h:outputText value="Nome:" />
-                    <p:inputText value="#{gerenciamentoAluno.aluno.nome}"/>
-                    <h:outputText value="Data de nascimento:" />
-                    <p:calendar value="#{gerenciamentoAluno.aluno.dataNasc}"/>
+                <p:messages id="messages" autoUpdate="true"/>
+                <h:panelGrid id="panel" columns="3" cellpadding="4">
+                    <h:outputText value="Nome *:" />
+                    <p:inputText id="inputNome" value="#{gerenciamentoAluno.aluno.nome}" required="true"/>
+                    <p:message for="inputNome" display="icon"/>
+                    
+                    <h:outputText value="Data de nascimento *:" />
+                    <p:calendar id="inputCal" value="#{gerenciamentoAluno.aluno.dataNasc}" required="true"/>
+                    <p:message for="inputCal" display="icon"/>
+                    
                     <h:outputText value="Número RG:" />
-                    <p:inputText value="#{gerenciamentoAluno.aluno.rg}"/>
-                    <h:outputText value="Sexo:" />
-                    <p:selectOneRadio value="#{gerenciamentoAluno.aluno.sexo}">
+                    <p:inputText id="inputRg" value="#{gerenciamentoAluno.aluno.rg}"/>
+                    <h:outputText value=""/>
+                    
+                    <h:outputText value="Sexo *:" />
+                    <p:selectOneRadio id="inputSexo" value="#{gerenciamentoAluno.aluno.sexo}" required="true">
                         <f:selectItem itemLabel="Masculino" itemValue='M'/>
                         <f:selectItem itemLabel="Feminino" itemValue='F'/>
                     </p:selectOneRadio>
-                    <h:outputText value="Telefone:" />
-                    <p:inputMask mask="(99)09999-9999" value="#{gerenciamentoAluno.aluno.telefone}"/>
-                    <h:outputText value="  " />
-                    <h:outputText value="  " />
-                    <h:outputText value="Estado:" />
-                    <p:selectOneMenu value="#{gerenciamentoAluno.aluno.uf}">
+                    <p:message for="inputSexo" display="icon"/>
+                    
+                    <h:outputText value="Idade *:" />
+                    <p:inputText id="inputIdade" value="#{gerenciamentoAluno.aluno.idade}" required="true"/>
+                    <p:message for="inputIdade" display="icon"/>
+                    
+                    <h:outputText value="Telefone *:" />
+                    <p:inputMask id="inputTel" mask="(99)09999-9999" value="#{gerenciamentoAluno.aluno.telefone}" required="true"/>
+                    <p:message for="inputTel" display="icon"/>
+                    
+                    <h:outputText value="Estado *:" />
+                    <p:selectOneMenu id="inputUf" value="#{gerenciamentoAluno.aluno.uf}" required="true">
                         <f:selectItem itemLabel="AC" itemValue="AC"/>
                         <f:selectItem itemLabel="AL" itemValue="AL"/>
                         <f:selectItem itemLabel="AP" itemValue="AP"/>
@@ -75,26 +87,39 @@
                         <f:selectItem itemLabel="TO" itemValue="TO"/>
                         <f:selectItem itemLabel="--" itemValue="--"/>
                     </p:selectOneMenu>
-                    <h:outputText value="Cidade:" />
-                    <p:inputText value="#{gerenciamentoAluno.aluno.cidade}"/>
+                    <p:message for="inputUf" display="icon"/>
+                    
+                    <h:outputText value="Cidade *:" />
+                    <p:inputText id="inputCidade" value="#{gerenciamentoAluno.aluno.cidade}" required="true"/>
+                    <p:message for="inputCidade" display="icon"/>
+                    
                     <h:outputText value="Endereço:" />
-                    <p:inputText value="#{gerenciamentoAluno.aluno.endereco}"/>
+                    <p:inputText id="inputEnd" required="true" value="#{gerenciamentoAluno.aluno.endereco}"/>
+                    <p:message for="inputEnd" display="icon"/>
+                    
                     <h:outputText value="Complemento:" />
                     <p:inputText value="#{gerenciamentoAluno.aluno.complemento}"/>
-                    <h:outputText value="  " />
-                    <h:outputText value="  " />
+                    <h:outputText value=""/>
+                    
                     <h:outputText value="Nome do Pai:" />
                     <p:inputText value="#{gerenciamentoAluno.aluno.nomePai}"/>
+                    <h:outputText value=""/>
+                    
                     <h:outputText value="Telefone do Pai:" />
                     <p:inputMask mask="(99)09999-9999" value="#{gerenciamentoAluno.aluno.telefonePai}"/>  
+                    <h:outputText value=""/>
+                    
                     <h:outputText value="Nome da Mãe:" />
                     <p:inputText value="#{gerenciamentoAluno.aluno.nomeMae}" />
+                    <h:outputText value=""/>
+                    
                     <h:outputText value="Telefone da Mãe:" />
                     <p:inputMask mask="(99)09999-9999" value="#{gerenciamentoAluno.aluno.telefoneMae}" />
+                    <h:outputText value=""/>
                 </h:panelGrid>
 
                 <h:panelGrid columns="2">
-                    <p:commandButton value="Salvar" style="color: green" onclick="confirmation.show()"/>
+                    <p:commandButton value="Salvar" style="color: green" actionListener="#{gerenciamentoAluno.cadastrarAluno}" update="panel" onsuccess="confirmation.show()"/>
                     <p:commandButton value="Cancelar" style="color: red" onclick="swBack()"/>      
                 </h:panelGrid>
             </h:form>

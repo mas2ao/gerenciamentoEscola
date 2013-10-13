@@ -1,6 +1,7 @@
 package com.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Set;
 import javax.persistence.*;
 
@@ -19,7 +20,8 @@ public class Aluno implements Serializable {
     private String nome;
     
     @Column(name = "data_nasc")
-    private String dataNasc;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date dataNasc;
     
     @Column(name = "idade")
     private String idade;
@@ -72,11 +74,11 @@ public class Aluno implements Serializable {
         this.nome = nome;
     }
 
-    public String getDataNasc() {
+    public Date getDataNasc() {
         return dataNasc;
     }
 
-    public void setDataNasc(String dataNasc) {
+    public void setDataNasc(Date dataNasc) {
         this.dataNasc = dataNasc;
     }
 
