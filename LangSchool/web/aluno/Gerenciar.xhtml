@@ -9,236 +9,243 @@
     <ui:composition template="/template.xhtml">
         <ui:define name="panelHeader">Gerenciar Aluno</ui:define>
         <ui:define name="centro">
-            <h:form>
+            <h:form id="formGerAluno">
                 <h:panelGrid columns="2" cellpadding="5">
                     <h:outputText value="Pesquisar por:" />
-                    <p:selectOneMenu>
-                        <f:selectItem itemLabel="Nome" />
-                        <f:selectItem itemLabel="Estado do Aluno" />
+                    <p:selectOneMenu value="#{gerenciarAluno.param}">
+                        <f:selectItem itemLabel="Nome" itemValue="nome"/>
+                        <f:selectItem itemLabel="Telefone" itemValue="telefone"/>
                     </p:selectOneMenu>
                 </h:panelGrid>
 
-                <p:inputText style="width:60%" />
-                <p:button value="Buscar" style="color: blue" />
+                <p:inputText style="width:60%" value="#{gerenciarAluno.busca}"/>
+                <p:commandButton value="Buscar" style="color: blue"
+                                 actionListener="#{gerenciarAluno.consultarAluno}" update="alunos"/>
 
-                <p:panelGrid style="margin-top: 20px; width: 80%">
+                <p:dataTable id="alunos" var="aluno" value="#{gerenciarAluno.alunos}">
                     <f:facet name="header">
-                        <p:row>
-                            <p:column style="font-weight: bold; color: teal" colspan="181">Resultados da Busca</p:column>
-                        </p:row>
-
-                        <p:row>
-                            <p:column colspan="100">Nome</p:column>
-                            <p:column colspan="1">Idade</p:column>
-                            <p:column style="font-weight: bold; color: orangered" colspan="80">Ações</p:column> 
-                        </p:row>
+                        Lista de Alunos
                     </f:facet>
 
-                    <p:row>
-                        <p:column colspan="100" style="font-weight: normal; text-align: center">Massao Uyeno</p:column>
-                        <p:column colspan="1" style="font-weight: normal; text-align: center">22</p:column>
-                        <p:column colspan="20">
-                            <div style="text-align: center">
-                                <p:commandButton value="VISUALIZAR" style="font-size: small; font-weight: bolder" />
-                            </div>
-                        </p:column>
-                        <p:column colspan="20">
-                            <div style="text-align: center">
-                                <p:commandButton value="ALTERAR" style="font-size: small; font-weight: bolder" />
-                            </div>
-                        </p:column>
-                        <p:column colspan="20">
-                            <div style="text-align: center">
-                                <p:commandButton value="REMOVER" style="font-size: small; font-weight: bolder; color: red" />
-                            </div>
-                        </p:column>
-                    </p:row>
+                    <p:column headerText="ID">
+                        <h:outputText value="#{aluno.id}"/>
+                    </p:column>
+                    
+                    <p:column headerText="NOME">
+                        <h:outputText value="#{aluno.nome}"/>
+                    </p:column>
 
-                    <p:row>
-                        <p:column colspan="100" style="font-weight: normal; background-color: #dddddd; text-align: center">Jousué dos Santos Junior</p:column>
-                        <p:column colspan="1" style="font-weight: normal; text-align: center">22</p:column>
-                        <p:column colspan="20">
-                            <div style="text-align: center">
-                                <p:commandButton value="VISUALIZAR" style="font-size: small; font-weight: bolder" onclick="dlgo.show();" />
-                            </div>
-                        </p:column>
-                        <p:column colspan="20">
-                            <div style="text-align: center">
-                                <p:commandButton value="ALTERAR" style="font-size: small; font-weight: bolder" onclick="dlgo2.show()"/>
-                            </div>
-                        </p:column>
-                        <p:column colspan="20">
-                            <div style="text-align: center">
-                                <p:commandButton value="REMOVER" style="font-size: small; color: red; font-weight: bolder" onclick="dlgo3.show()"/>
-                            </div>
-                        </p:column>
-                    </p:row>
+                    <p:column headerText="IDADE">
+                        <h:outputText value="#{aluno.idade}"/>
+                    </p:column>
 
-                    <p:row>
-                        <p:column colspan="100" style="font-weight: normal; text-align: center">Yukio Siraichi</p:column>
-                        <p:column colspan="1" style="font-weight: normal; text-align: center">20</p:column>
-                        <p:column colspan="20">
-                            <div style="text-align: center">
-                                <p:commandButton value="VISUALIZAR" style="font-size: small; font-weight: bolder" />
-                            </div>
-                        </p:column>
-                        <p:column colspan="20">
-                            <div style="text-align: center">
-                                <p:commandButton value="ALTERAR" style="font-size: small; font-weight: bolder" />
-                            </div>
-                        </p:column>
-                        <p:column colspan="20">
-                            <div style="text-align: center">
-                                <p:commandButton value="REMOVER" style="font-size: small; font-weight: bolder; color: red" />
-                            </div>
-                        </p:column>
-                    </p:row>
-                </p:panelGrid>
+                    <p:column headerText="TELEFONE">
+                        <h:outputText value="#{aluno.telefone}"/>
+                    </p:column>
 
-                <p:dialog header="Visualização" widgetVar="dlgo">
-                    <p:accordionPanel style="font-size: 13px" activeIndex="-1">
-                        <p:tab title="Vizualizar Foto">
-                            <h:panelGrid columns="2">
-                                <p:photoCam style="width: 300px; height: 250px" />                  
-                            </h:panelGrid>
-                        </p:tab>
-                    </p:accordionPanel>
+                    <p:column headerText="SEXO">
+                        <h:outputText value="#{aluno.sexo}"/>
+                    </p:column>
+
+                    <p:column>
+                        <div style="text-align: center">
+                            <p:commandButton value="VISUALIZAR" style="font-size: small; font-weight: bolder" actionListener="#{gerenciarAluno.escolherAluno}" oncomplete="dlgViz.show()"
+                                             update=":formGerAluno:dlogViz">
+                                <f:attribute name="aluno" value="#{aluno}"/>
+                            </p:commandButton>
+                        </div>
+                    </p:column>
+                    <p:column>
+                        <div style="text-align: center">
+                            <p:commandButton value="ALTERAR" style="font-size: small; font-weight: bolder" 
+                                             actionListener="#{gerenciarAluno.escolherAluno}" oncomplete="dlgAlt.show()"
+                                             update=":formGerAluno:dlogAlt">
+                                <f:attribute name="aluno" value="#{aluno}"/>
+                            </p:commandButton>
+                        </div>
+                    </p:column>
+                    <p:column>
+                        <div style="text-align: center">
+                            <p:commandButton value="REMOVER" style="font-size: small; font-weight: bolder" 
+                                             actionListener="#{gerenciarAluno.escolherAluno}" oncomplete="dlgRem.show()"
+                                             update=":formGerAluno:dlogRem">
+                                <f:attribute name="aluno" value="#{aluno}"/>
+                            </p:commandButton>
+                        </div>
+                    </p:column>
+                </p:dataTable>
+
+                <p:dialog id="dlogViz" header="Visualização" widgetVar="dlgViz">
                     <p:scrollPanel style="width: 800px; height: 400px">
-                        <h:panelGrid columns="4" cellpadding="5">
-                            <h:outputText value="Nome:" />
-                            <p:inputText value="Jousué dos Santos Junior" />
-                            <h:outputText value="Data de nascimento:" />
-                            <p:inputText value="01/08/1990" />
+                        <h:panelGrid columns="4" cellpadding="5" id="panelViz">
+                            <h:outputText value="Nome *:" />
+                            <p:inputText id="inputNome" value="#{gerenciarAluno.aluno.nome}" required="true" disabled="true"/>
+
+                            <h:outputText value="Data de nascimento *:" />
+                            <p:calendar id="inputCal" value="#{gerenciarAluno.aluno.dataNasc}" required="true" disabled="true"/>
+
                             <h:outputText value="Número RG:" />
-                            <p:inputText value="6.452.674-8" />
-                            <h:outputText value="Sexo:" />
-                            <p:selectOneRadio>
-                                <f:selectItem itemLabel="Masculino" />
-                                <f:selectItem itemLabel="Feminino" />
+                            <p:inputText id="inputRg" value="#{gerenciarAluno.aluno.rg}" disabled="true"/>
+
+                            <h:outputText value="Sexo *:" />
+                            <p:selectOneRadio id="inputSexo" value="#{gerenciarAluno.aluno.sexo}" required="true" disabled="true">
+                                <f:selectItem itemLabel="Masculino" itemValue='M'/>
+                                <f:selectItem itemLabel="Feminino" itemValue='F'/>
                             </p:selectOneRadio>
-                            <h:outputText value="Telefone Residencial:" />
-                            <p:inputText value="3029-3464" />
-                            <h:outputText value="  " />
-                            <h:outputText value="  " />
-                            <h:outputText value="CEP:" />
-                            <p:inputText value="86000-380" />
-                            <h:outputText value="Estado:" />
-                            <p:selectOneMenu>
-                                <f:selectItem itemLabel="AC" />
+
+                            <h:outputText value="Idade *:" />
+                            <p:inputText id="inputIdade" value="#{gerenciarAluno.aluno.idade}" required="true" disabled="true"/>
+
+                            <h:outputText value="Telefone *:" />
+                            <p:inputMask id="inputTel" mask="(99)09999-9999" value="#{gerenciarAluno.aluno.telefone}" required="true" disabled="true"/>
+
+                            <h:outputText value="Estado *:" />
+                            <p:selectOneMenu id="inputUf" value="#{gerenciarAluno.aluno.uf}" required="true" disabled="true">
+                                <f:selectItem itemLabel="AC" itemValue="AC"/>
+                                <f:selectItem itemLabel="AL" itemValue="AL"/>
+                                <f:selectItem itemLabel="AP" itemValue="AP"/>
+                                <f:selectItem itemLabel="AM" itemValue="AM"/>
+                                <f:selectItem itemLabel="BA" itemValue="BA"/>
+                                <f:selectItem itemLabel="CE" itemValue="CE"/>
+                                <f:selectItem itemLabel="DF" itemValue="DF"/>
+                                <f:selectItem itemLabel="ES" itemValue="ES"/>
+                                <f:selectItem itemLabel="GO" itemValue="GO"/>
+                                <f:selectItem itemLabel="MA" itemValue="MA"/>
+                                <f:selectItem itemLabel="MT" itemValue="MT"/>
+                                <f:selectItem itemLabel="MS" itemValue="MS"/>
+                                <f:selectItem itemLabel="MG" itemValue="MG"/>
+                                <f:selectItem itemLabel="PA" itemValue="PA"/>
+                                <f:selectItem itemLabel="PB" itemValue="PB"/>
+                                <f:selectItem itemLabel="PR" itemValue="PR"/>
+                                <f:selectItem itemLabel="PE" itemValue="PE"/>
+                                <f:selectItem itemLabel="PI" itemValue="PI"/>
+                                <f:selectItem itemLabel="RJ" itemValue="RJ"/>
+                                <f:selectItem itemLabel="RN" itemValue="RN"/>
+                                <f:selectItem itemLabel="RS" itemValue="RS"/>
+                                <f:selectItem itemLabel="RO" itemValue="RO"/>
+                                <f:selectItem itemLabel="RR" itemValue="RR"/>
+                                <f:selectItem itemLabel="SC" itemValue="SC"/>
+                                <f:selectItem itemLabel="SP" itemValue="SP"/>
+                                <f:selectItem itemLabel="SE" itemValue="SE"/>
+                                <f:selectItem itemLabel="TO" itemValue="TO"/>
+                                <f:selectItem itemLabel="--" itemValue="--"/>
                             </p:selectOneMenu>
-                            <h:outputText value="Cidade:" />
-                            <p:inputText value="Maringá" />
-                            <h:outputText value="Endereço:" />
-                            <p:inputText value="Rua Logo Ali" />
-                            <h:outputText value="Número:" />
-                            <p:inputText value="666" />
-                            <h:outputText value="  " />
-                            <h:outputText value="  " />
+
+                            <h:outputText value="Cidade *:" />
+                            <p:inputText id="inputCidade" value="#{gerenciarAluno.aluno.cidade}" required="true" disabled="true"/>
+
+                            <h:outputText value="Endereço *:" />
+                            <p:inputText id="inputEnd" required="true" value="#{gerenciarAluno.aluno.endereco}" disabled="true"/>
+
+                            <h:outputText value="Complemento:" />
+                            <p:inputText value="#{gerenciarAluno.aluno.complemento}" disabled="true"/>
+
                             <h:outputText value="Nome do Pai:" />
-                            <p:inputText value="Josué dos Santos" />
+                            <p:inputText value="#{gerenciarAluno.aluno.nomePai}" disabled="true"/>
+
                             <h:outputText value="Telefone do Pai:" />
-                            <p:inputText value="9974-2365" />  
+                            <p:inputMask mask="(99)09999-9999" value="#{gerenciarAluno.aluno.telefonePai}" disabled="true"/> 
+
                             <h:outputText value="Nome da Mãe:" />
-                            <p:inputText value="Maria Rosângela dos Santos" />
+                            <p:inputText value="#{gerenciarAluno.aluno.nomeMae}"  disabled="true"/>
+
                             <h:outputText value="Telefone da Mãe:" />
-                            <p:inputText value="9137-2345" />
-                            <h:outputText value="Estado:" />
-                            <p:selectBooleanButton onLabel="INATIVO" offLabel="ATIVO" disabled="true"/>
+                            <p:inputMask mask="(99)09999-9999" value="#{gerenciarAluno.aluno.telefoneMae}"  disabled="true"/>
                         </h:panelGrid>
                     </p:scrollPanel>
                 </p:dialog> 
 
                 <p:growl showDetail="false" severity="info" id="gAluno" />
+                <p:remoteCommand name="atualizarAlunos" update="alunos"/>
 
-                <p:dialog header="Alterar Dados" widgetVar="dlgo2">
-                    <p:accordionPanel style="font-size: 13px" activeIndex="-1">
-                        <p:tab title="Vizualizar Foto">
-                            <h:panelGrid columns="2">
-                                <p:photoCam style="width: 300px; height: 250px" />  
-                                <p:commandButton value="Capturar" style="margin-left: 50px;color: blue" />                
-                            </h:panelGrid>
-                        </p:tab>
-                    </p:accordionPanel>
+                <p:dialog id="dlogAlt" header="Alterar Dados" widgetVar="dlgAlt" onHide="atualizarAlunos()">
                     <h:panelGrid columns="5" cellpadding="4">
                         <h:outputText/>
                         <h:outputText/>
-                        <p:commandButton value="Salvar" style="color: green" actionListener="#{gmessages.alterar}" update="gAluno" oncomplete="dlgo2.hide()"/>
+                        <p:commandButton value="Salvar" style="color: green" actionListener="#{gerenciarAluno.alterarAluno}" update="gAluno" oncomplete="dlgAlt.hide()"/>
                         <h:outputText value="  " />
-                        <p:commandButton value="Cancelar" style="color: red" onclick="dlgo2.hide()"/> 
+                        <p:commandButton value="Cancelar" style="color: red" onclick="dlgAlt.hide()"/> 
                     </h:panelGrid>
                     <p:scrollPanel style="width: 800px; height: 400px">
-                        <h:panelGrid columns="4" cellpadding="5">
-                            <h:outputText value="Nome:" />
-                            <p:inputText value="Jousué dos Santos Junior" />
-                            <h:outputText value="Data de nascimento:" />
-                            <p:inputText value="01/08/1990" />
+                        <h:panelGrid columns="4" cellpadding="5" id="panelAlt">
+                            <h:outputText value="Nome *:" />
+                            <p:inputText value="#{gerenciarAluno.aluno.nome}" required="true"/>
+
+                            <h:outputText value="Data de nascimento *:" />
+                            <p:calendar value="#{gerenciarAluno.aluno.dataNasc}" required="true"/>
+
                             <h:outputText value="Número RG:" />
-                            <p:inputText value="6.452.674-8" />
-                            <h:outputText value="Sexo:" />
-                            <p:selectOneRadio>
-                                <f:selectItem itemLabel="Masculino" />
-                                <f:selectItem itemLabel="Feminino" />
+                            <p:inputText value="#{gerenciarAluno.aluno.rg}"/>
+
+                            <h:outputText value="Sexo *:" />
+                            <p:selectOneRadio value="#{gerenciarAluno.aluno.sexo}" required="true">
+                                <f:selectItem itemLabel="Masculino" itemValue='M'/>
+                                <f:selectItem itemLabel="Feminino" itemValue='F'/>
                             </p:selectOneRadio>
-                            <h:outputText value="Telefone Residencial:" />
-                            <p:inputText value="3029-3464" />
-                            <h:outputText value="  " />
-                            <h:outputText value="  " />
-                            <h:outputText value="CEP:" />
-                            <p:inputText value="86000-380" />
-                            <h:outputText value="Estado:" />
-                            <p:selectOneMenu>
-                                <f:selectItem itemLabel="AC" />
-                                <f:selectItem itemLabel="AL" />
-                                <f:selectItem itemLabel="AP" />
-                                <f:selectItem itemLabel="AM" />
-                                <f:selectItem itemLabel="BA" />
-                                <f:selectItem itemLabel="CE" />
-                                <f:selectItem itemLabel="DF" />
-                                <f:selectItem itemLabel="ES" />
-                                <f:selectItem itemLabel="GO" />
-                                <f:selectItem itemLabel="MA" />
-                                <f:selectItem itemLabel="MT" />
-                                <f:selectItem itemLabel="MS" />
-                                <f:selectItem itemLabel="MG" />
-                                <f:selectItem itemLabel="PA" />
-                                <f:selectItem itemLabel="PB" />
-                                <f:selectItem itemLabel="PR" />
-                                <f:selectItem itemLabel="PE" />
-                                <f:selectItem itemLabel="PI" />
-                                <f:selectItem itemLabel="RJ" />
-                                <f:selectItem itemLabel="RN" />
-                                <f:selectItem itemLabel="RS" />
-                                <f:selectItem itemLabel="RO" />
-                                <f:selectItem itemLabel="RR" />
-                                <f:selectItem itemLabel="SC" />
-                                <f:selectItem itemLabel="SP" />
-                                <f:selectItem itemLabel="SE" />
-                                <f:selectItem itemLabel="TO" />
-                                <f:selectItem itemLabel="--" />
+
+                            <h:outputText value="Idade *:" />
+                            <p:inputText value="#{gerenciarAluno.aluno.idade}" required="true"/>
+
+                            <h:outputText value="Telefone *:" />
+                            <p:inputMask mask="(99)09999-9999" value="#{gerenciarAluno.aluno.telefone}" required="true"/>
+
+                            <h:outputText value="Estado *:" />
+                            <p:selectOneMenu value="#{gerenciarAluno.aluno.uf}" required="true">
+                                <f:selectItem itemLabel="AC" itemValue="AC"/>
+                                <f:selectItem itemLabel="AL" itemValue="AL"/>
+                                <f:selectItem itemLabel="AP" itemValue="AP"/>
+                                <f:selectItem itemLabel="AM" itemValue="AM"/>
+                                <f:selectItem itemLabel="BA" itemValue="BA"/>
+                                <f:selectItem itemLabel="CE" itemValue="CE"/>
+                                <f:selectItem itemLabel="DF" itemValue="DF"/>
+                                <f:selectItem itemLabel="ES" itemValue="ES"/>
+                                <f:selectItem itemLabel="GO" itemValue="GO"/>
+                                <f:selectItem itemLabel="MA" itemValue="MA"/>
+                                <f:selectItem itemLabel="MT" itemValue="MT"/>
+                                <f:selectItem itemLabel="MS" itemValue="MS"/>
+                                <f:selectItem itemLabel="MG" itemValue="MG"/>
+                                <f:selectItem itemLabel="PA" itemValue="PA"/>
+                                <f:selectItem itemLabel="PB" itemValue="PB"/>
+                                <f:selectItem itemLabel="PR" itemValue="PR"/>
+                                <f:selectItem itemLabel="PE" itemValue="PE"/>
+                                <f:selectItem itemLabel="PI" itemValue="PI"/>
+                                <f:selectItem itemLabel="RJ" itemValue="RJ"/>
+                                <f:selectItem itemLabel="RN" itemValue="RN"/>
+                                <f:selectItem itemLabel="RS" itemValue="RS"/>
+                                <f:selectItem itemLabel="RO" itemValue="RO"/>
+                                <f:selectItem itemLabel="RR" itemValue="RR"/>
+                                <f:selectItem itemLabel="SC" itemValue="SC"/>
+                                <f:selectItem itemLabel="SP" itemValue="SP"/>
+                                <f:selectItem itemLabel="SE" itemValue="SE"/>
+                                <f:selectItem itemLabel="TO" itemValue="TO"/>
+                                <f:selectItem itemLabel="--" itemValue="--"/>
                             </p:selectOneMenu>
-                            <h:outputText value="Cidade:" />
-                            <p:inputText value="Maringá" />
-                            <h:outputText value="Endereço:" />
-                            <p:inputText value="Rua Logo Ali" />
-                            <h:outputText value="Número:" />
-                            <p:inputText value="666" />
-                            <h:outputText value="  " />
-                            <h:outputText value="  " />
+
+                            <h:outputText value="Cidade *:" />
+                            <p:inputText value="#{gerenciarAluno.aluno.cidade}" required="true"/>
+
+                            <h:outputText value="Endereço *:" />
+                            <p:inputText required="true" value="#{gerenciarAluno.aluno.endereco}"/>
+
+                            <h:outputText value="Complemento:" />
+                            <p:inputText value="#{gerenciarAluno.aluno.complemento}"/>
+
                             <h:outputText value="Nome do Pai:" />
-                            <p:inputText value="Josué dos Santos" />
+                            <p:inputText value="#{gerenciarAluno.aluno.nomePai}"/>
+
                             <h:outputText value="Telefone do Pai:" />
-                            <p:inputText value="9974-2365" />  
+                            <p:inputMask mask="(99)09999-9999" value="#{gerenciarAluno.aluno.telefonePai}"/> 
+
                             <h:outputText value="Nome da Mãe:" />
-                            <p:inputText value="Maria Rosângela dos Santos" />
+                            <p:inputText value="#{gerenciarAluno.aluno.nomeMae}" />
+
                             <h:outputText value="Telefone da Mãe:" />
-                            <p:inputText value="9137-2345" />
-                            <h:outputText value="Estado:" />
-                            <p:selectBooleanButton onLabel="INATIVO" offLabel="ATIVO"/>
+                            <p:inputMask mask="(99)09999-9999" value="#{gerenciarAluno.aluno.telefoneMae}" />
                         </h:panelGrid>
                     </p:scrollPanel>
                 </p:dialog> 
 
-                <p:dialog header="Remover" widgetVar="dlgo3">
+                <p:dialog id="dlogRem" header="Remover" widgetVar="dlgRem" onHide="atualizarAlunos()">
                     <h:outputText value="Tem certeza que deseja remover este aluno??" style="font-size: large; color: red" />
                     <br/>
                     <p:separator/>
@@ -246,12 +253,12 @@
                     <h:panelGrid columns="2" style="width: 100%">
                         <p:column colspan="20">
                             <div style="text-align: center">
-                                <p:commandButton value="SIM" style="color: green; font-weight: bolder" actionListener="#{gmessages.remover}" update="gAluno" oncomplete="dlgo3.hide()"/>
+                                <p:commandButton value="SIM" style="color: green; font-weight: bolder" actionListener="#{gerenciarAluno.removerAluno}" update="gAluno" oncomplete="dlgRem.hide()"/>
                             </div>
                         </p:column>
                         <p:column colspan="20">
                             <div style="text-align: center">
-                                <p:commandButton value="NÃO" style="color: red; font-weight: bolder" onclick="dlgo3.hide()"/>
+                                <p:commandButton value="NÃO" style="color: red; font-weight: bolder" onclick="dlgRem.hide()"/>
                             </div>
                         </p:column>                        
                     </h:panelGrid>
