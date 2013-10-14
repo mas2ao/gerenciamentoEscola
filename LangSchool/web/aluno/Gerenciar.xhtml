@@ -79,28 +79,28 @@
                     <p:scrollPanel style="width: 800px; height: 400px">
                         <h:panelGrid columns="4" cellpadding="5" id="panelViz">
                             <h:outputText value="Nome *:" />
-                            <p:inputText id="inputNome" value="#{gerenciarAluno.aluno.nome}" required="true" disabled="true"/>
+                            <p:inputText value="#{gerenciarAluno.selecionado.nome}" required="true" disabled="true"/>
 
                             <h:outputText value="Data de nascimento *:" />
-                            <p:calendar id="inputCal" value="#{gerenciarAluno.aluno.dataNasc}" required="true" disabled="true"/>
+                            <p:calendar value="#{gerenciarAluno.selecionado.dataNasc}" required="true" disabled="true"/>
 
                             <h:outputText value="Número RG:" />
-                            <p:inputText id="inputRg" value="#{gerenciarAluno.aluno.rg}" disabled="true"/>
+                            <p:inputText value="#{gerenciarAluno.selecionado.rg}" disabled="true"/>
 
                             <h:outputText value="Sexo *:" />
-                            <p:selectOneRadio id="inputSexo" value="#{gerenciarAluno.aluno.sexo}" required="true" disabled="true">
+                            <p:selectOneRadio value="#{gerenciarAluno.selecionado.sexo}" required="true" disabled="true">
                                 <f:selectItem itemLabel="Masculino" itemValue='M'/>
                                 <f:selectItem itemLabel="Feminino" itemValue='F'/>
                             </p:selectOneRadio>
 
                             <h:outputText value="Idade *:" />
-                            <p:inputText id="inputIdade" value="#{gerenciarAluno.aluno.idade}" required="true" disabled="true"/>
+                            <p:inputText value="#{gerenciarAluno.selecionado.idade}" required="true" disabled="true"/>
 
                             <h:outputText value="Telefone *:" />
-                            <p:inputMask id="inputTel" mask="(99)09999-9999" value="#{gerenciarAluno.aluno.telefone}" required="true" disabled="true"/>
+                            <p:inputMask mask="(99)09999-9999" value="#{gerenciarAluno.selecionado.telefone}" required="true" disabled="true"/>
 
                             <h:outputText value="Estado *:" />
-                            <p:selectOneMenu id="inputUf" value="#{gerenciarAluno.aluno.uf}" required="true" disabled="true">
+                            <p:selectOneMenu value="#{gerenciarAluno.selecionado.uf}" required="true" disabled="true">
                                 <f:selectItem itemLabel="AC" itemValue="AC"/>
                                 <f:selectItem itemLabel="AL" itemValue="AL"/>
                                 <f:selectItem itemLabel="AP" itemValue="AP"/>
@@ -132,25 +132,25 @@
                             </p:selectOneMenu>
 
                             <h:outputText value="Cidade *:" />
-                            <p:inputText id="inputCidade" value="#{gerenciarAluno.aluno.cidade}" required="true" disabled="true"/>
+                            <p:inputText value="#{gerenciarAluno.selecionado.cidade}" required="true" disabled="true"/>
 
                             <h:outputText value="Endereço *:" />
-                            <p:inputText id="inputEnd" required="true" value="#{gerenciarAluno.aluno.endereco}" disabled="true"/>
+                            <p:inputText required="true" value="#{gerenciarAluno.selecionado.endereco}" disabled="true"/>
 
                             <h:outputText value="Complemento:" />
-                            <p:inputText value="#{gerenciarAluno.aluno.complemento}" disabled="true"/>
+                            <p:inputText value="#{gerenciarAluno.selecionado.complemento}" disabled="true"/>
 
                             <h:outputText value="Nome do Pai:" />
-                            <p:inputText value="#{gerenciarAluno.aluno.nomePai}" disabled="true"/>
+                            <p:inputText value="#{gerenciarAluno.selecionado.nomePai}" disabled="true"/>
 
                             <h:outputText value="Telefone do Pai:" />
-                            <p:inputMask mask="(99)09999-9999" value="#{gerenciarAluno.aluno.telefonePai}" disabled="true"/> 
+                            <p:inputMask mask="(99)09999-9999" value="#{gerenciarAluno.selecionado.telefonePai}" disabled="true"/> 
 
                             <h:outputText value="Nome da Mãe:" />
-                            <p:inputText value="#{gerenciarAluno.aluno.nomeMae}"  disabled="true"/>
+                            <p:inputText value="#{gerenciarAluno.selecionado.nomeMae}"  disabled="true"/>
 
                             <h:outputText value="Telefone da Mãe:" />
-                            <p:inputMask mask="(99)09999-9999" value="#{gerenciarAluno.aluno.telefoneMae}"  disabled="true"/>
+                            <p:inputMask mask="(99)09999-9999" value="#{gerenciarAluno.selecionado.telefoneMae}"  disabled="true"/>
                         </h:panelGrid>
                     </p:scrollPanel>
                 </p:dialog> 
@@ -169,28 +169,28 @@
                     <p:scrollPanel style="width: 800px; height: 400px">
                         <h:panelGrid columns="4" cellpadding="5" id="panelAlt">
                             <h:outputText value="Nome *:" />
-                            <p:inputText value="#{gerenciarAluno.aluno.nome}" required="true"/>
+                            <p:inputText value="#{gerenciarAluno.selecionado.nome}" required="true"/>
 
                             <h:outputText value="Data de nascimento *:" />
-                            <p:calendar value="#{gerenciarAluno.aluno.dataNasc}" required="true"/>
+                            <p:calendar value="#{gerenciarAluno.selecionado.dataNasc}" required="true"/>
 
                             <h:outputText value="Número RG:" />
-                            <p:inputText value="#{gerenciarAluno.aluno.rg}"/>
+                            <p:inputText value="#{gerenciarAluno.selecionado.rg}"/>
 
                             <h:outputText value="Sexo *:" />
-                            <p:selectOneRadio value="#{gerenciarAluno.aluno.sexo}" required="true">
+                            <p:selectOneRadio value="#{gerenciarAluno.selecionado.sexo}" required="true">
                                 <f:selectItem itemLabel="Masculino" itemValue='M'/>
                                 <f:selectItem itemLabel="Feminino" itemValue='F'/>
                             </p:selectOneRadio>
 
                             <h:outputText value="Idade *:" />
-                            <p:inputText value="#{gerenciarAluno.aluno.idade}" required="true"/>
+                            <p:inputText value="#{gerenciarAluno.selecionado.idade}" required="true"/>
 
                             <h:outputText value="Telefone *:" />
-                            <p:inputMask mask="(99)09999-9999" value="#{gerenciarAluno.aluno.telefone}" required="true"/>
+                            <p:inputMask mask="(99)09999-9999" value="#{gerenciarAluno.selecionado.telefone}" required="true"/>
 
                             <h:outputText value="Estado *:" />
-                            <p:selectOneMenu value="#{gerenciarAluno.aluno.uf}" required="true">
+                            <p:selectOneMenu value="#{gerenciarAluno.selecionado.uf}" required="true">
                                 <f:selectItem itemLabel="AC" itemValue="AC"/>
                                 <f:selectItem itemLabel="AL" itemValue="AL"/>
                                 <f:selectItem itemLabel="AP" itemValue="AP"/>
@@ -222,25 +222,25 @@
                             </p:selectOneMenu>
 
                             <h:outputText value="Cidade *:" />
-                            <p:inputText value="#{gerenciarAluno.aluno.cidade}" required="true"/>
+                            <p:inputText value="#{gerenciarAluno.selecionado.cidade}" required="true"/>
 
                             <h:outputText value="Endereço *:" />
-                            <p:inputText required="true" value="#{gerenciarAluno.aluno.endereco}"/>
+                            <p:inputText required="true" value="#{gerenciarAluno.selecionado.endereco}"/>
 
                             <h:outputText value="Complemento:" />
-                            <p:inputText value="#{gerenciarAluno.aluno.complemento}"/>
+                            <p:inputText value="#{gerenciarAluno.selecionado.complemento}"/>
 
                             <h:outputText value="Nome do Pai:" />
-                            <p:inputText value="#{gerenciarAluno.aluno.nomePai}"/>
+                            <p:inputText value="#{gerenciarAluno.selecionado.nomePai}"/>
 
                             <h:outputText value="Telefone do Pai:" />
-                            <p:inputMask mask="(99)09999-9999" value="#{gerenciarAluno.aluno.telefonePai}"/> 
+                            <p:inputMask mask="(99)09999-9999" value="#{gerenciarAluno.selecionado.telefonePai}"/> 
 
                             <h:outputText value="Nome da Mãe:" />
-                            <p:inputText value="#{gerenciarAluno.aluno.nomeMae}" />
+                            <p:inputText value="#{gerenciarAluno.selecionado.nomeMae}" />
 
                             <h:outputText value="Telefone da Mãe:" />
-                            <p:inputMask mask="(99)09999-9999" value="#{gerenciarAluno.aluno.telefoneMae}" />
+                            <p:inputMask mask="(99)09999-9999" value="#{gerenciarAluno.selecionado.telefoneMae}" />
                         </h:panelGrid>
                     </p:scrollPanel>
                 </p:dialog> 

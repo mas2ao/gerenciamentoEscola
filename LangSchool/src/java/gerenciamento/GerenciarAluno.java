@@ -15,6 +15,7 @@ import messages.Gmessages;
 @ManagedBean
 public class GerenciarAluno {
     private Aluno aluno = new Aluno();
+    private Aluno selecionado;
     private List<Aluno> alunos;
     private EntityPersist ep = new EntityPersist();
     private String busca = new String();
@@ -24,6 +25,7 @@ public class GerenciarAluno {
     public GerenciarAluno() {
         System.out.println("Ativado");
         alunos = ep.search(Aluno.class);
+        selecionado = new Aluno();
     }
 
     public Aluno getAluno() {
@@ -57,6 +59,14 @@ public class GerenciarAluno {
     public void setParam(String param) {
         this.param = param;
     }
+
+    public Aluno getSelecionado() {
+        return selecionado;
+    }
+
+    public void setSelecionado(Aluno selecionado) {
+        this.selecionado = selecionado;
+    }
     
     public void cadastrarAluno(ActionEvent ae) {
         try {
@@ -78,11 +88,10 @@ public class GerenciarAluno {
     
     public void consultarAluno(ActionEvent ae) {
         System.out.println("AQUIII");
-        if(busca.equals("")) {
+        if(busca.trim().equals("")) 
             this.alunos = ep.search(Aluno.class);
-        } else {
+        else
             this.alunos = ep.search(Aluno.class, new CriteriaGroup("eq", param, busca, null));
-        }
     }
     
     public void alterarAluno(ActionEvent ae) {
@@ -96,6 +105,6 @@ public class GerenciarAluno {
     
     public void escolherAluno(ActionEvent ae) {
         System.out.println("ESCOLHER");
-        this.aluno = (Aluno) ae.getComponent().getAttributes().get("aluno");
+        this.selecionado = (Aluno) ae.getComponent().getAttributes().get("aluno");
     }
 }
