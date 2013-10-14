@@ -66,6 +66,19 @@ public class Aluno implements Serializable {
         estado = "ativo";
     }
 
+    public Aluno(String nome, Date dataNasc, String telefone, String idade, String endereco, String uf, String cidade, char sexo) {
+        this.nome = nome;
+        this.dataNasc = dataNasc;
+        this.idade = idade;
+        this.endereco = endereco;
+        this.uf = uf;
+        this.cidade = cidade;
+        this.sexo = sexo;
+        this.telefone = telefone;
+        this.estado = "ativo";
+    }
+    
+    
     public int getId() {
         return id;
     }

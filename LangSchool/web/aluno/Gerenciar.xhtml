@@ -12,7 +12,7 @@
             <h:form id="formGerAluno">
                 <br/>
                 <h:panelGrid columns="2" cellpadding="5">
-                    <h:outputText value="Filtro"/>
+                    <h:outputText value="Pesquisar por:"/>
                     <p:selectOneMenu value="#{gerenciarAluno.param}">
                         <f:selectItem itemLabel="Nome" itemValue="nome"/>
                         <f:selectItem itemLabel="Estado" itemValue="estado"/>
@@ -22,7 +22,8 @@
                 <p:inputText style="width: 60%;" value="#{gerenciarAluno.busca}"/>
                 <p:commandButton icon="ui-icon-search" value="Buscar" style="color: blue; margin-left: 10px; margin-bottom: 20px" actionListener="#{gerenciarAluno.consultarAluno}" update="dtAlunos"/>
 
-                <p:dataTable var="aluno" id="dtAlunos" value="#{gerenciarAluno.alunos}">
+                <p:dataTable var="aluno" id="dtAlunos" value="#{gerenciarAluno.alunos}"
+                             emptyMessage="Aluno nao encontrado!">
                     <f:facet name="header">
                         Lista de Alunos
                     </f:facet>
@@ -74,7 +75,7 @@
                             <p:inputText value="#{gerenciarAluno.selecionado.nome}" disabled="true"/>
 
                             <h:outputText value="Data de nascimento *:" />
-                            <p:calendar value="#{gerenciarAluno.selecionado.dataNasc}" disabled="true"/>
+                            <p:inputMask mask="99/99/99" value="#{gerenciarAluno.selecionado.dataNasc}" disabled="true"/>
 
                             <h:outputText value="Número RG:" />
                             <p:inputText value="#{gerenciarAluno.selecionado.rg}" disabled="true"/>
@@ -135,7 +136,7 @@
                             <p:inputText value="#{gerenciarAluno.selecionado.nome}"/>
 
                             <h:outputText value="Data de nascimento *:" />
-                            <p:calendar value="#{gerenciarAluno.selecionado.dataNasc}"/>
+                            <p:inputMask mask="99/99/99" value="#{gerenciarAluno.selecionado.dataNasc}"/>
 
                             <h:outputText value="Número RG:" />
                             <p:inputText value="#{gerenciarAluno.selecionado.rg}"/>

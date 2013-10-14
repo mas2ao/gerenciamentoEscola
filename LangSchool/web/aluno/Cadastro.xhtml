@@ -34,7 +34,7 @@
                     <p:message for="inputNome" display="icon"/>
                     
                     <h:outputText value="Data de nascimento *:" />
-                    <p:calendar id="inputCal" value="#{gerenciarAluno.aluno.dataNasc}" required="true"/>
+                    <p:inputMask id="inputCal" mask="99/99/99" value="#{gerenciarAluno.aluno.dataNasc}"/>
                     <p:message for="inputCal" display="icon"/>
                     
                     <h:outputText value="Número RG:" />
@@ -53,7 +53,7 @@
                     <p:message for="inputIdade" display="icon"/>
                     
                     <h:outputText value="Telefone *:" />
-                    <p:inputMask id="inputTel" mask="(99)09999-9999" value="#{gerenciarAluno.aluno.telefone}" required="true"/>
+                    <p:inputMask id="inputTel" mask="(99)9999-9999" value="#{gerenciarAluno.aluno.telefone}" required="true"/>
                     <p:message for="inputTel" display="icon"/>
                     
                     <h:outputText value="Estado *:" />
@@ -119,8 +119,8 @@
                 </h:panelGrid>
 
                 <h:panelGrid columns="2">
-                    <p:commandButton value="Salvar" style="color: green" actionListener="#{gerenciarAluno.cadastrarAluno}" update="panel" oncomplete="confirmation.show()"/>
-                    <p:commandButton value="Cancelar" style="color: red" onclick="swBack()"/>      
+                    <p:commandButton icon="ui-icon-plus" value="Salvar" style="color: green" actionListener="#{gerenciarAluno.cadastrarAluno}" update="panel" oncomplete="confirmation.show()"/>
+                    <p:commandButton icon="ui-icon-close" value="Cancelar" style="color: red" onclick="swBack()"/>      
                 </h:panelGrid>
             </h:form>
         </ui:define>
