@@ -6,10 +6,8 @@ import com.util.CriteriaGroup;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import messages.Gmessages;
 
@@ -21,7 +19,7 @@ public class GerenciarAluno {
     private String busca, param;
     private List<Aluno> alunos;
     private Gmessages msg = new Gmessages();
-    
+
     public GerenciarAluno() {
         System.out.println("Ativado");
         selecionado = new Aluno();
@@ -69,7 +67,7 @@ public class GerenciarAluno {
     public void setSelecionado(Aluno selecionado) {
         this.selecionado = selecionado;
     }
-    
+
     public void cadastrarAluno(ActionEvent ae) {
         try {
             ep.save(aluno);
@@ -77,20 +75,20 @@ public class GerenciarAluno {
             Logger.getLogger(GerenciarAluno.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public void consultarAluno(ActionEvent ae) {
         if(busca.trim().equals(""))
             alunos = ep.search(Aluno.class);
         else
             alunos = ep.search(Aluno.class, new CriteriaGroup("eq", param, busca, null));
     }
-    
+
     public void selectAluno(ActionEvent ae) {
         System.out.println("DEU!");
         selecionado = (Aluno) ae.getComponent().getAttributes().get("aluno");
         System.out.println(selecionado.getNome()  );
     }
-    
+
     public void alterarAluno(ActionEvent ae) {
         System.out.println("Alterando");
         try {
