@@ -13,7 +13,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "Professor")
 public class Professor {
-    @Id
+    @Id 
     @GeneratedValue
     @Column(name = "id")
     private int id;
@@ -26,18 +26,6 @@ public class Professor {
     
     @Column(name = "telefone")
     private String telefone;
-    
-    public Professor(String nome, String email, String telefone) {
-        this.nome = nome;
-        this.email = email;
-        this.telefone = telefone;
-    }
-    
-    public Professor() { }
-    
-    public void setId(int id){
-        this.id = id;
-    }
     
     public int getId(){
         return this.id;

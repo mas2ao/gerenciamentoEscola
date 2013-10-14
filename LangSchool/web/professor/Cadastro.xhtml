@@ -24,13 +24,13 @@
                 </p:dialog> 
                     <h:panelGrid columns="2" cellpadding="4" style="width: auto;height: 100%">
                         <h:outputText value="Nome:" />
-                        <p:inputText id="nome" value="#{gerenciarProfessor.nome}"/> 
+                        <p:inputText id="nome" value="#{gerenciarProfessor.professor.nome}"/> 
                         
                         <h:outputText value="Email:" />
-                        <p:inputText id="email" value="#{gerenciarProfessor.email}"/>
+                        <p:inputText id="email" value="#{gerenciarProfessor.professor.email}"/>
                         
                         <h:outputText value="Telefone:" />
-                        <p:inputText id="telefone" value="#{gerenciarProfessor.telefone}"/>
+                        <p:inputText id="telefone" value="#{gerenciarProfessor.professor.telefone}"/>
                         
                         <p:commandButton value="Cadastrar" style="color: green"
                                          action="#{gerenciarProfessor.cadastrarProfessor}" 
