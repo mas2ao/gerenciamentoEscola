@@ -17,45 +17,23 @@ import javax.faces.bean.ManagedBean;
  */
 @ManagedBean
 public class GerenciarProfessor {
-    private String nome;
-    private String email;
-    private String telefone;
+    private Professor professor = new Professor();
     private List<Professor> professores;
     private EntityPersist ep = new EntityPersist();
     
-    public void setNome(String nome){
-        this.nome = nome;
+    public void setProfessor(Professor professor){
+        this.professor = professor;
     }
     
-    public String getNome(){
-        return this.nome;
-    }
-    
-    public void setEmail(String email){
-        this.email = email;
-    }
-    
-    public String getEmail(){
-        return this.email;
-    }
-    
-    public void setTelefone(String telefone){
-        this.telefone = telefone;
-    }
-    
-    public String getTelefone(){
-        return this.telefone;
+    public Professor getProfessor(){
+        return this.professor;
     }
     
     public List<Professor> getProfessores(){
         return this.professores;
     }
     
-    public void cadastrarProfessor() {
-        Professor professor = new Professor();
-        professor.setNome(nome);
-        professor.setEmail(email);
-        professor.setTelefone(telefone);
+    public void cadastrarProfessor(){
         try {
             ep.save(professor);
         } catch (Exception ex) {

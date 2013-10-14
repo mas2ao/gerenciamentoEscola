@@ -12,9 +12,9 @@
             <h:form>
                 <h:panelGrid columns="3">
                     <h:outputText value="Nome do professor: "/>
-                    <p:inputText value="#{gerenciarProfessor.nome}"/>
+                    <p:inputText value="#{gerenciarProfessor.professor.nome}"/>
                     <p:commandButton value="Buscar" icon="ui-icon-search" 
-                                     action="#{gerenciarProfessor.consultarProfessor(gerenciarProfessor.nome)}"
+                                     action="#{gerenciarProfessor.consultarProfessor(gerenciarProfessor.professor.nome)}"
                                      style="color: blue" update="professores"/>
                 </h:panelGrid>
 
