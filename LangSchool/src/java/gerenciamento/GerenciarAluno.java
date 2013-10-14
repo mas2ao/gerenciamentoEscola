@@ -18,6 +18,7 @@ public class GerenciarAluno {
     private EntityPersist ep;
     private String busca, param;
     private List<Aluno> alunos;
+    private boolean isAtivo;
     private Gmessages msg = new Gmessages();
 
     public GerenciarAluno() {
@@ -25,7 +26,7 @@ public class GerenciarAluno {
         selecionado = new Aluno();
         aluno = new Aluno();
         ep = new EntityPersist();
-        alunos = ep.search(Aluno.class);
+        alunos = ep.search(Aluno.class, new CriteriaGroup("eq", "estado", "ativo", aluno));
     }
 
     public Aluno getAluno() {
@@ -68,6 +69,14 @@ public class GerenciarAluno {
         this.selecionado = selecionado;
     }
 
+    public boolean isIsAtivo() {
+        return isAtivo;
+    }
+
+    public void setIsAtivo(boolean isAtivo) {
+        this.isAtivo = isAtivo;
+    }
+
     public void cadastrarAluno(ActionEvent ae) {
         try {
             ep.save(aluno);
@@ -78,15 +87,18 @@ public class GerenciarAluno {
 
     public void consultarAluno(ActionEvent ae) {
         if(busca.trim().equals(""))
-            alunos = ep.search(Aluno.class);
-        else
+            alunos = ep.search(Aluno.class, new CriteriaGroup("eq", "estado", "ativo", null));
+        else if(!param.equals("estado")) {
+            alunos = ep.search(Aluno.class, new CriteriaGroup("eq", param, busca, null),
+                    new CriteriaGroup("eq", "estado", "ativo", null));
+        } else
             alunos = ep.search(Aluno.class, new CriteriaGroup("eq", param, busca, null));
     }
 
     public void selectAluno(ActionEvent ae) {
         System.out.println("DEU!");
         selecionado = (Aluno) ae.getComponent().getAttributes().get("aluno");
-        System.out.println(selecionado.getNome()  );
+        setIsAtivo(!"inativo".equals(selecionado.getEstado()));
     }
 
     public void alterarAluno(ActionEvent ae) {
@@ -97,5 +109,25 @@ public class GerenciarAluno {
         } catch (Exception ex) {
             Logger.getLogger(GerenciarAluno.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public void removerAluno(ActionEvent ae) {
+        System.out.println("Removendo");
+        selecionado.setEstadoInativo();
+        try {
+            ep.update(selecionado);
+            msg.remover(ae);
+            busca = "";
+            param = "Nome";
+            consultarAluno(ae);
+        } catch (Exception ex) {
+            Logger.getLogger(GerenciarAluno.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void ativar(ActionEvent ae) {
+        selecionado.setEstadoAtivo();
+        msg.ativado(ae);
+        setIsAtivo(false);
     }
 }
