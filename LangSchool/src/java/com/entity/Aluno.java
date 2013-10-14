@@ -61,6 +61,10 @@ public class Aluno implements Serializable {
     
     @Column(name = "sexo")
     private char sexo;
+    
+    public Aluno() {
+        estado = "ativo";
+    }
 
     public int getId() {
         return id;
