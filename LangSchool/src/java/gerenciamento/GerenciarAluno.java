@@ -14,18 +14,18 @@ import messages.Gmessages;
 @ViewScoped
 @ManagedBean
 public class GerenciarAluno {
-    private Aluno aluno = new Aluno();
-    private Aluno selecionado;
+    private Aluno aluno, selecionado;
+    private EntityPersist ep;
+    private String busca, param;
     private List<Aluno> alunos;
-    private EntityPersist ep = new EntityPersist();
-    private String busca = new String();
-    private String param = new String();
     private Gmessages msg = new Gmessages();
-    
+
     public GerenciarAluno() {
         System.out.println("Ativado");
-        alunos = ep.search(Aluno.class);
         selecionado = new Aluno();
+        aluno = new Aluno();
+        ep = new EntityPersist();
+        alunos = ep.search(Aluno.class);
     }
 
     public Aluno getAluno() {
@@ -34,14 +34,6 @@ public class GerenciarAluno {
 
     public void setAluno(Aluno aluno) {
         this.aluno = aluno;
-    }
-
-    public List<Aluno> getAlunos() {
-        return alunos;
-    }
-
-    public void setAlunos(List<Aluno> alunos) {
-        this.alunos = alunos;
     }
 
     public String getBusca() {
@@ -60,6 +52,14 @@ public class GerenciarAluno {
         this.param = param;
     }
 
+    public List<Aluno> getAlunos() {
+        return alunos;
+    }
+
+    public void setAlunos(List<Aluno> alunos) {
+        this.alunos = alunos;
+    }
+
     public Aluno getSelecionado() {
         return selecionado;
     }
@@ -67,7 +67,7 @@ public class GerenciarAluno {
     public void setSelecionado(Aluno selecionado) {
         this.selecionado = selecionado;
     }
-    
+
     public void cadastrarAluno(ActionEvent ae) {
         try {
             ep.save(aluno);
@@ -75,36 +75,27 @@ public class GerenciarAluno {
             Logger.getLogger(GerenciarAluno.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public void removerAluno(ActionEvent ae) {
-        this.aluno.setEstadoInativo();
-        try {
-            ep.update(aluno);
-            msg.remover(ae);
-        } catch (Exception ex) {
-            Logger.getLogger(GerenciarAluno.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
+
     public void consultarAluno(ActionEvent ae) {
-        System.out.println("AQUIII");
-        if(busca.trim().equals("")) 
-            this.alunos = ep.search(Aluno.class);
+        if(busca.trim().equals(""))
+            alunos = ep.search(Aluno.class);
         else
-            this.alunos = ep.search(Aluno.class, new CriteriaGroup("eq", param, busca, null));
+            alunos = ep.search(Aluno.class, new CriteriaGroup("eq", param, busca, null));
     }
-    
+
+    public void selectAluno(ActionEvent ae) {
+        System.out.println("DEU!");
+        selecionado = (Aluno) ae.getComponent().getAttributes().get("aluno");
+        System.out.println(selecionado.getNome()  );
+    }
+
     public void alterarAluno(ActionEvent ae) {
+        System.out.println("Alterando");
         try {
-            ep.update(aluno);
+            ep.update(selecionado);
             msg.alterar(ae);
         } catch (Exception ex) {
             Logger.getLogger(GerenciarAluno.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-    
-    public void escolherAluno(ActionEvent ae) {
-        System.out.println("ESCOLHER");
-        this.selecionado = (Aluno) ae.getComponent().getAttributes().get("aluno");
     }
 }
