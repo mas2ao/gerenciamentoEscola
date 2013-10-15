@@ -1,15 +1,8 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.entity;
 
 import javax.persistence.*;
 
-/**
- *
- * @author john
- */
 @Entity
 @Table(name = "Professor")
 public class Professor {
@@ -26,6 +19,13 @@ public class Professor {
     
     @Column(name = "telefone")
     private String telefone;
+    
+    @Column(name = "estado")
+    private String estado;
+    
+    public Professor(){
+        this.estado = "ativo";
+    }
     
     public int getId(){
         return this.id;
@@ -53,5 +53,13 @@ public class Professor {
     
     public String getTelefone(){
         return this.telefone;
+    }
+    
+    public void setEstado(String estado){
+        this.estado = estado;
+    }
+    
+    public String getEstado(){
+        return this.estado;
     }
 }

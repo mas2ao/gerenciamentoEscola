@@ -23,6 +23,10 @@ public class Nivel implements Serializable {
     @Column(name = "estado")
     private String estado;
 
+    public Nivel(){
+        this.estado = "ativo";
+    }
+  
     public int getCargaHoraria() {
         return cargaHoraria;
     }

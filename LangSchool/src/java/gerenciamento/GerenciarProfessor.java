@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package gerenciamento;
 
 import com.entity.Professor;
@@ -11,15 +8,18 @@ import com.util.CriteriaGroup;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 
-/**
- *
- * @author john
- */
 @ManagedBean
 public class GerenciarProfessor {
-    private Professor professor = new Professor();
+    private Professor professor;
     private List<Professor> professores;
-    private EntityPersist ep = new EntityPersist();
+    private EntityPersist ep;
+    
+    public GerenciarProfessor(){
+        professor = new Professor();
+        ep = new EntityPersist();
+        professores = ep.search(Professor.class, 
+                new CriteriaGroup("eq","estado","ativo",null));
+    }
     
     public void setProfessor(Professor professor){
         this.professor = professor;
@@ -33,7 +33,7 @@ public class GerenciarProfessor {
         return this.professores;
     }
     
-    public void cadastrarProfessor(){
+    public void adicionarProfessor(){
         try {
             ep.save(professor);
         } catch (Exception ex) {
