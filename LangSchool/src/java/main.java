@@ -1,5 +1,6 @@
 
 import com.entity.Aluno;
+import com.entity.Curso;
 import com.entity.Professor;
 import com.persist.EntityPersist;
 import com.util.CriteriaGroup;
@@ -15,6 +16,7 @@ public class main {
         
         EntityPersist ep = new EntityPersist();
         try {
+            //Alunos
             ep.save(new Aluno("marcos", new Date(1993, 02, 17), "111111111",
                     "13", "rua 11111 -111", "PR", "Maringa", 'M'));
             ep.save(new Aluno("lucas", new Date(1993, 02, 17), "222222222",
@@ -25,6 +27,10 @@ public class main {
                     "29", "rua 444444- -444", "PR", "Campo Mourao", 'M'));
             ep.save(new Aluno("william", new Date(1993, 02, 17), "5555555555",
                     "37", "rua 55555 -555", "PR", "Foz do Iguacu", 'M'));
+            //Cursos
+            ep.save(new Curso("Japones", "Um curso para o aprendizado de japones."));
+            ep.save(new Curso("Ingles", "Um curso para o aprendizado de ingles."));
+            ep.save(new Curso("Espanhol", "Um curso para o aprendizado de espanhol."));
         } catch (Exception ex) {
             Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
         }
