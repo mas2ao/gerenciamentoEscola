@@ -1,11 +1,12 @@
 
 package com.entity;
 
+import java.io.Serializable;
 import javax.persistence.*;
 
 @Entity
 @Table(name = "Professor")
-public class Professor {
+public class Professor implements Serializable {
     @Id 
     @GeneratedValue
     @Column(name = "id")
@@ -24,6 +25,13 @@ public class Professor {
     private String estado;
     
     public Professor(){
+        this.estado = "ativo";
+    }
+
+    public Professor(String nome, String email, String telefone) {
+        this.nome = nome;
+        this.email = email;
+        this.telefone = telefone;
         this.estado = "ativo";
     }
     

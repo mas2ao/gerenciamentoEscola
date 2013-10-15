@@ -45,6 +45,15 @@ public class Turma implements Serializable {
     public Turma(){
         this.estado = "ativo";
     }
+
+    public Turma(Professor professor, Nivel nivel, String turma, String descricao, int vagas) {
+        this.professor = professor;
+        this.nivel = nivel;
+        this.turma = turma;
+        this.descricao = descricao;
+        this.vagas = vagas;
+        this.estado = "ativo";
+    }
     
     public void setId(int id){
         this.id = id;
