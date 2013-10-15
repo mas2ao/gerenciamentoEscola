@@ -100,6 +100,10 @@ public class GerenciarMatricula {
     }
 
     public void cadastrarMatricula(ActionEvent ae) {
+        if(matricula.getTurma().getVagas() == 0) {
+            msg.falhaCadastro(ae);
+            return;
+        }
         matricula.setDataMatricula(new Date());
         try {
             ep.save(matricula);
