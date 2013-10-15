@@ -37,8 +37,13 @@ public class Matricula implements Serializable {
     @OneToMany(mappedBy = "matricula")
     private Set<ReposicaoAula> reposicoes;
 
-    @Column(name = "estado")
-    private String estado;
+    public Matricula() {}
+    
+    public Matricula(Aluno aluno, Turma turma, Date dataMatricula) {
+        this.aluno = aluno;
+        this.turma = turma;
+        this.dataMatricula = dataMatricula;
+    }    
     
     public int getId() {
         return id;
@@ -70,14 +75,5 @@ public class Matricula implements Serializable {
 
     public void setDataMatricula(Date dataMatricula) {
         this.dataMatricula = dataMatricula;
-    }
-    
-    public String getEstado() {
-        return this.estado;
-    }
-    
-    public void alteraEstado() {
-        if(this.estado.equals("inativo")) this.estado = "ativo";
-        this.estado = "inativo";
     }
 }

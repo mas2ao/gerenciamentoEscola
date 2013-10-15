@@ -73,6 +73,5 @@ public class Curso implements Serializable {
         if(o == null || !(o instanceof Curso))
             return false;
         return (((Curso)o).getNome().equals(this.nome));
-        
     }
 }

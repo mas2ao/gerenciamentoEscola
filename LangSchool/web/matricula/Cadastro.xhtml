@@ -6,9 +6,9 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets">
     <ui:composition template="/template.xhtml">
-        <ui:define name="panelHeader">Matricular</ui:define>
+        <ui:define name="panelHeader">Cadastrar Matricula</ui:define>
         <ui:define name="centro">
-            <h:form>
+            <h:form id="formGrid">
                 <script>
                     function swNew(){
                         self.location = "/LangSchool/faces/matricula/Cadastro.xhtml";
@@ -18,8 +18,8 @@
                     }
                 </script>
 
-                <p:dialog header="Matriculado com Sucesso!" widgetVar="confirmation">  
-                    <p:outputLabel value="Deseja matricular outro aluno?" />
+                <p:dialog header="Cadastrado com Sucesso!" widgetVar="confirmation">  
+                    <p:outputLabel value="Deseja cadastrar outra matricula?" />
                     <br/>
                     <br/>
                     <p:separator/>
@@ -27,37 +27,33 @@
                     <p:commandButton id="decline" value="Não" onclick="confirmation.hide();swBack()" type="button"/>   
 
                 </p:dialog> 
-                <h:panelGrid columns="2" cellpadding="4" style="width: auto;height: 100%">
-                    <h:outputText value="Nome:" />
-                    <p:autoComplete value="Jousué" />
+                <h:panelGrid id="panel" columns="2" cellpadding="4">
+                    <h:outputText value="Aluno *:" />
+                    <p:selectOneMenu value="#{gerenciarMatricula.matricula.aluno}" converter="aluno"
+                                     filter="true" filterMatchMode="contains">
+                        <f:selectItem itemLabel="Selecione" itemValue=""/>
+                        <f:selectItems value="#{gerenciarMatricula.alunoMan.alunos}" var="aluno" itemLabel="#{aluno.nome}" itemValue="#{aluno}"/>
+                    </p:selectOneMenu>
                     
-                    <h:outputText value="Data:" />
-                    <p:calendar />
-
-                    <h:outputText value="Curso:" />
-                    <p:selectOneMenu>
-                        <f:selectItem itemLabel="Alemão" />
-                        <f:selectItem itemLabel="Mandarim" />
-                        <f:selectItem itemLabel="Zdslfjklês" />
+                    <h:outputText value="Turma *:" />
+                    <p:selectOneMenu value="#{gerenciarMatricula.matricula.turma}" converter="turma"
+                                     filter="true" filterMatchMode="contains" var="t">
+                        <f:selectItem itemLabel="Selecione" itemValue=""/>
+                        <f:selectItems value="#{gerenciarMatricula.turmaMan.turmas}" var="turma" itemLabel="#{turma.turma}" itemValue="#{turma}"/>
+                        <p:column>
+                            #{t.turma}
+                        </p:column>
+                        <p:column>
+                            #{t.vagas}
+                        </p:column>
                     </p:selectOneMenu>
-
-                    <h:outputText value="Nível:"/>
-                    <p:selectOneMenu>
-                        <f:selectItem itemLabel="Zdslfjklês Basico I" />
-                        <f:selectItem itemLabel="Zdslfjklês Basico II" />
-                        <f:selectItem itemLabel="Zdslfjklês Basico III" />
-                        <f:selectItem itemLabel="Zdslfjklês Basico IV" />
-                        <f:selectItem itemLabel="Zdslfjklês Intermediario I" />
-                        <f:selectItem itemLabel="Zdslfjklês Intermediario II" />
-                        <f:selectItem itemLabel="Zdslfjklês Avancado I" />
-                        <f:selectItem itemLabel="Zdslfjklês Avancado II" />
-                    </p:selectOneMenu>
-
-                    <p:commandButton value="Matricular" style="color: green" onclick="confirmation.show()"/>
-                    <p:commandButton value="Cancelar" style="color: red" onclick="swBack()"/>      
+                </h:panelGrid>
+                
+                <h:panelGrid columns="2">
+                    <p:commandButton icon="ui-icon-plus" value="Salvar" style="color: green" actionListener="#{gerenciarMatricula.cadastrarMatricula}" update="panel" oncomplete="confirmation.show()"/>
+                    <p:commandButton icon="ui-icon-close" value="Cancelar" style="color: red" onclick="swBack()"/>      
                 </h:panelGrid>
             </h:form>
-
         </ui:define>
     </ui:composition>
 </html>

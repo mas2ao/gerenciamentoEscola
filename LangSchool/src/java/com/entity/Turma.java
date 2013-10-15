@@ -45,6 +45,15 @@ public class Turma implements Serializable {
     public Turma(){
         this.estado = "ativo";
     }
+
+    public Turma(Professor professor, Nivel nivel, String turma, String descricao, int vagas) {
+        this.professor = professor;
+        this.nivel = nivel;
+        this.turma = turma;
+        this.descricao = descricao;
+        this.vagas = vagas;
+        this.estado = "ativo";
+    }
     
     public void setId(int id){
         this.id = id;
@@ -109,4 +118,12 @@ public class Turma implements Serializable {
     public String getEstado(){
         return this.estado;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if(o == null || !(o instanceof Turma))
+            return false;
+        return (((Turma)o).getTurma().equals(this.turma));
+    }
+    
 }

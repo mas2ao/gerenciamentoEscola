@@ -26,6 +26,15 @@ public class Nivel implements Serializable {
     public Nivel(){
         this.estado = "ativo";
     }
+
+    public Nivel(String nome, String descricao, int cargaHoraria, Curso curso) {
+        this.nome = nome;
+        this.descricao = descricao;
+        this.cargaHoraria = cargaHoraria;
+        this.curso = curso;
+        this.estado = "ativo";
+    }
+    
   
     public int getCargaHoraria() {
         return cargaHoraria;
