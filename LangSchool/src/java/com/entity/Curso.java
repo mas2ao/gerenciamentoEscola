@@ -24,6 +24,13 @@ public class Curso implements Serializable {
     public Curso() {
         this.estado = "ativo";
     }
+
+    public Curso(String nome, String descricao) {
+        this.nome = nome;
+        this.descricao = descricao;
+        this.estado = "ativo";
+    }
+    
     
     public int getId() {
         return id;
@@ -59,5 +66,13 @@ public class Curso implements Serializable {
 
     public void setEstadoInativo() {
         this.estado = "inativo";
+    }
+    
+    @Override
+    public boolean equals(Object o) {
+        if(o == null || !(o instanceof Curso))
+            return false;
+        return (((Curso)o).getNome().equals(this.nome));
+        
     }
 }
