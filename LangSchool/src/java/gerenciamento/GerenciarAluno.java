@@ -77,6 +77,10 @@ public class GerenciarAluno {
         this.isAtivo = isAtivo;
     }
 
+    public List<Aluno> listar() {
+        return ep.search(Aluno.class);
+    }
+    
     public void cadastrarAluno(ActionEvent ae) {
         try {
             ep.save(aluno);

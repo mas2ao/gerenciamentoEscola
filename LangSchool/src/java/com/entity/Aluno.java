@@ -214,4 +214,12 @@ public class Aluno implements Serializable {
     public void setCidade(String cidade) {
         this.cidade = cidade;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if(o == null || !(o instanceof Aluno))
+            return false;
+        return (((Aluno)o).getNome().equals(this.nome));
+    }
+    
 }

@@ -118,4 +118,12 @@ public class Turma implements Serializable {
     public String getEstado(){
         return this.estado;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if(o == null || !(o instanceof Turma))
+            return false;
+        return (((Turma)o).getTurma().equals(this.turma));
+    }
+    
 }
