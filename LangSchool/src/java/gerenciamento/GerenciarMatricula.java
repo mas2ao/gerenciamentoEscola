@@ -1,5 +1,6 @@
 package gerenciamento;
 
+import com.entity.Aluno;
 import com.entity.Matricula;
 import com.entity.Nota;
 import com.persist.EntityPersist;
@@ -116,7 +117,15 @@ public class GerenciarMatricula {
     public void consultarMatricula(ActionEvent ae) {
         if(busca.trim().equals(""))
             matriculas = ep.search(Matricula.class);
-        else
+        else if(param.equals("nome")) {
+            List<Aluno> aluno = ep.search(Aluno.class, new CriteriaGroup("eq", "estado", "ativo", null),
+                    new CriteriaGroup("eq", param, busca, null));
+            if(!aluno.isEmpty())
+                matriculas = ep.search(Matricula.class, 
+                    new CriteriaGroup("eq", "aluno", aluno.get(0), null));
+            else
+                matriculas = null;
+        } else
             matriculas = ep.search(Matricula.class, new CriteriaGroup("eq", param, busca, null));
     }
 

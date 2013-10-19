@@ -70,4 +70,11 @@ public class Professor implements Serializable {
     public String getEstado(){
         return this.estado;
     }
+    
+    @Override
+    public boolean equals(Object o) {
+        if(o == null || !(o instanceof Professor))
+            return false;
+        return (((Professor)o).getNome().equals(this.nome));
+    }
 }
