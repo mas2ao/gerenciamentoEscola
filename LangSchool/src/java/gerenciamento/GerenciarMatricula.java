@@ -115,16 +115,20 @@ public class GerenciarMatricula {
     }
 
     public void consultarMatricula(ActionEvent ae) {
+        System.out.println("ponto1");
         if(busca.trim().equals(""))
             matriculas = ep.search(Matricula.class);
         else if(param.equals("nome")) {
+            System.out.println("ponto2");
             List<Aluno> aluno = ep.search(Aluno.class, new CriteriaGroup("eq", "estado", "ativo", null),
                     new CriteriaGroup("eq", param, busca, null));
+            System.out.println("ponto3");
             if(!aluno.isEmpty())
                 matriculas = ep.search(Matricula.class, 
                     new CriteriaGroup("eq", "aluno", aluno.get(0), null));
             else
                 matriculas = null;
+            System.out.println("ponto4");
         } else
             matriculas = ep.search(Matricula.class, new CriteriaGroup("eq", param, busca, null));
     }

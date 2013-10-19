@@ -136,7 +136,13 @@ public class GerenciarReposicao {
     public void consultarReposicaoAula(ActionEvent ae) {
         if(busca.trim().equals(""))
             reposicoes = ep.search(ReposicaoAula.class);
-        else
+        else if(param.equals("nome")) {
+            matriculaMan.setBusca(busca);
+            matriculaMan.setParam(param);
+            matriculaMan.consultarMatricula(ae);
+            reposicoes = ep.search(ReposicaoAula.class, 
+                    new CriteriaGroup("eq", "matricula", matriculaMan.getMatriculas().get(0), null));
+        } else
             reposicoes = ep.search(ReposicaoAula.class, new CriteriaGroup("eq", param, busca, null));
     }
 
