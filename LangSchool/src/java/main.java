@@ -7,9 +7,7 @@ import com.entity.Professor;
 import com.entity.Turma;
 import com.persist.EntityPersist;
 import com.util.CriteriaGroup;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
