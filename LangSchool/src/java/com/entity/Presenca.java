@@ -5,6 +5,7 @@
 package com.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.*;
 
 /**
@@ -19,8 +20,12 @@ public class Presenca implements Serializable {
     @GeneratedValue
     private int id;
     
-    @Column(name = "data")
-    private String data;
+    @Column(name = "dia")
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date dia;
+    
+    @Column(name = "presente/ausente")
+    private int presAus;
     
     @ManyToOne
     @JoinColumn(name = "id_matricula")
@@ -33,8 +38,16 @@ public class Presenca implements Serializable {
         return id;
     }
     
-    public String getData(){
-        return data;
+    public Date getDia(){
+        return dia;
+    }
+    
+    public void setDia(Date dia){
+        this.dia = dia;
+    }
+    
+    public int getPresAus(){
+        return presAus;
     }
     
     public void alteraEstado(String estado){

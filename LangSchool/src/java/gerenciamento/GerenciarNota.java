@@ -4,68 +4,97 @@
  */
 package gerenciamento;
 
+import com.entity.Aluno;
 import com.entity.Matricula;
+import com.entity.Nota;
 import com.persist.EntityPersist;
+import com.util.CriteriaGroup;
+import java.util.List;
+import javax.faces.bean.ManagedBean;
+import javax.faces.event.ActionEvent;
 
 /**
  *
  * @author massao
  */
+@ManagedBean
 public class GerenciarNota {
-    
-    private int id;
-    private int nota1;
-    private int nota2;
-    private int nota3;
-    private int nota4;
+
+    private Nota nota = new Nota();
+    private String estado, busca, param;
+    private Matricula selecionado;
+    private List<Aluno> alunos;
     private EntityPersist ep = new EntityPersist();
-    
-    public void seId(int id){
-        this.id = id;
+
+    public Nota getNota(){
+        return nota;
     }
-    public int getId(){
-        return id;
-    }
-    
-    public void setNota1(int nota1){
-        this.nota1 = nota1;
-    }
-    public int getNota1(){
-        return nota1;
+    public void setNota(Nota nota){
+        this.nota = nota;
     }
     
-    public void setNota2(int nota2){
-        this.nota2 = nota2;
+    public String getBusca(){
+        return busca;
     }
-    public int getNota2(){
-        return nota2;
-    }
-    
-    public void setNota3(int nota3){
-        this.nota3 = nota3;
-    }
-    public int getNota3(){
-        return nota3;
+    public void setBusca(String busca){
+        this.busca = busca;
     }
     
-    public void setNota4(int nota4){
-        this.nota4 = nota4;
+    public String getParam(){
+        return param;
     }
-    public int getNota4(){
-        return nota4;
-    }
-    
-    public void alterarNota(Matricula aluno, int av){
-        
-    }
-    
-    public int calcMedia(Matricula aluno){
-        int media;
-        
-        media = Math.round((aluno.notas.nota1)+(aluno.notas.nota2)+(aluno.notas.nota3)+(aluno.notas.nota4))/4));
-        return media;
+    public void setParam(String param){
+        this.param = param;
     }
 
+    public Matricula getSelecionado(){
+        return selecionado;
+    }
+    public void setSelecionado(Matricula selecionado){
+        this.selecionado = selecionado;
+    }
     
+    public void escolherAluno(ActionEvent ae) {
+        this.selecionado = (Matricula)ae.getComponent().getAttributes().get("matricula");
+        System.out.println(selecionado.getMatricula());
+    }
+    
+    public void consultarAluno(ActionEvent ae) {
+        if (busca.trim().equals(""))
+            this.alunos = ep.search(Aluno.class);
+        else
+            this.alunos = ep.search(Aluno.class, new CriteriaGroup("eq", param, busca, null));
+    }
+    
+    public void adicionarNotas(){
+        nota.setNota1(0);
+        nota.setNota2(0);
+        nota.setNota3(0);
+        nota.setNota4(0);
+        try {
+            ep.save(nota);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+    
+    public void alterarNota(){
+        try {
+            ep.update(nota);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+    
+    public void excluirNota(Matricula aluno){
+        aluno.alteraEstado();
+    }
+    
+    public int calcularMedia(Matricula aluno){
+        int media;
+        
+        media = Math.round((nota.getNota1())+(nota.getNota2())+(nota.getNota3())+(nota.getNota4()))/4;
+        return media;
+    }
     
 }

@@ -34,8 +34,7 @@ public class Nota implements Serializable {
     @Column(name = "estado")
     private String estado;
     
-    
-   public int getId(){
+       public int getId(){
        return id;
    }
    

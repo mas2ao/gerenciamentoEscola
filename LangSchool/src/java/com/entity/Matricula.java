@@ -80,4 +80,8 @@ public class Matricula implements Serializable {
         if(this.estado.equals("inativo")) this.estado = "ativo";
         this.estado = "inativo";
     }
+
+    public boolean getMatricula() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

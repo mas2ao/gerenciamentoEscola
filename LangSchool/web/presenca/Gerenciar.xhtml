@@ -13,16 +13,46 @@
                 <h:panelGrid columns="2">
                     <h:outputText value="Pesquisar por:" />
                     <p:selectOneMenu>
-                        <f:selectItem itemLabel="Curso" itemValue="1" />
-                        <f:selectItem itemLabel="Nome" itemValue="2" />
-                        <f:selectItem itemLabel="ID Matrícula" itemValue="3" />
-                        <f:selectItem itemLabel="Turma" itemValue="4" />
+                        <f:selectItem itemLabel="Curso" itemValue="curso" />
+                        <f:selectItem itemLabel="Nome" itemValue="nome" />
+                        <f:selectItem itemLabel="ID Matrícula" itemValue="id" />
+                        <f:selectItem itemLabel="Turma" itemValue="turma" />
                     </p:selectOneMenu>
                 </h:panelGrid>
 
                 <p:inputText style="width:60%" />
                 <p:button value="Buscar" style="color: blue" />
 
+                <p:dataTable var="presenca" value="#{gerenciarPresenca.presenca}" style="width:800px" emptyMessage="Nenhum dado encontrado.">
+                    <f:facet name="header">Resultados da Busca</f:facet>
+                     <p:column headerText="ID Matricula">
+                        <h:outputText value="#{aluno.id}"/>
+                    </p:column>
+                    <p:column headerText="Nome">
+                        <h:outputText value="#{aluno.nome}"/>
+                    </p:column>
+                    <p:column headerText="Curso">
+                        <h:outputText value=""/>
+                    </p:column>
+                    <p:column headerText="Nível">
+                        <h:outputText value=""/>
+                    </p:column>
+                    <p:column headerText="Turma">
+                        <h:outputText value=""/>
+                    </p:column>
+                    <p:column headerText="Ações" style="color: orangered">
+                        <p:commandButton value="VISUALIZAR" style="font-size: small; font-weight: bolder" actionListener="#{gerenciarPresenca.escolherAluno}" oncomplete="visualizar.show();" update="">
+                            <f:attribute name="matricula" value=""/>
+                        </p:commandButton>
+                        <p:commandButton value="ALTERAR" style="font-size: small; font-weight: bolder" actionListener="#{gerenciarPresenca.escolherAluno}" oncomplete="alterar.show();" update="">
+                            <f:attribute name="matricula" value=""/>
+                        </p:commandButton>
+                        <p:commandButton value="TURMA INTEIRA" style="font-size: small; font-weight: bolder" actionListener="#{gerenciarPresenca.escolherAluno}" oncomplete="turma.show();" update="">
+                            <f:attribute name="matricula" value=""/>
+                        </p:commandButton>
+                    </p:column>
+                </p:dataTable>
+<!--     
                 <p:panelGrid style="margin-top: 20px; width: 80%">
                     <f:facet name="header">
                         <p:row>
@@ -39,30 +69,6 @@
                             <p:column style="font-weight: bold; color: orangered" colspan="60">Ações</p:column> 
                         </p:row>
                     </f:facet>
-
-                    <p:row>
-                        <p:column colspan="20" style="font-weight: normal; text-align: center">003</p:column>
-                        <p:column colspan="100" style="font-weight: normal; text-align: center">Massao Uyeno</p:column>
-                        <p:column colspan="1" style="font-weight: normal; text-align: center">22</p:column>
-                        <p:column colspan="49" style="font-weight: normal; text-align: center">Japonês</p:column>
-                        <p:column colspan="50" style="font-weight: normal; text-align: center">Medio III</p:column>
-                        <p:column colspan="15" style="font-weight: normal; text-align: center">02</p:column>
-                        <p:column colspan="20">
-                            <div style="text-align: center">
-                                <p:commandButton value="VISUALIZAR" style="font-size: small; font-weight: bolder" />
-                            </div>
-                        </p:column>
-                        <p:column colspan="20">
-                            <div style="text-align: center">
-                                <p:commandButton value="ALTERAR" style="font-size: small; font-weight: bolder" />
-                            </div>
-                        </p:column>
-                        <p:column colspan="20">
-                            <div style="text-align: center">
-                                <p:commandButton value="TURMA INTEIRA" style="font-size: small; font-weight: bolder" />
-                            </div>
-                        </p:column>
-                    </p:row>
 
                     <p:row>
                         <p:column colspan="20" style="font-weight: normal; text-align: center">001</p:column>
@@ -87,46 +93,21 @@
                             </div>
                         </p:column>
                     </p:row>
-
-                    <p:row>
-                        <p:column colspan="20" style="font-weight: normal; text-align: center">005</p:column>
-                        <p:column colspan="100" style="font-weight: normal; text-align: center">Yukio Siraichi</p:column>
-                        <p:column colspan="1" style="font-weight: normal; text-align: center">20</p:column>
-                        <p:column colspan="49" style="font-weight: normal; text-align: center">Mandarim</p:column>
-                        <p:column colspan="50" style="font-weight: normal; text-align: center">Avançado II</p:column>
-                        <p:column colspan="15" style="font-weight: normal; text-align: center">07</p:column>
-                        <p:column colspan="20">
-                            <div style="text-align: center">
-                                <p:commandButton value="VISUALIZAR" style="font-size: small; font-weight: bolder" />
-                            </div>
-                        </p:column>
-                        <p:column colspan="20">
-                            <div style="text-align: center">
-                                <p:commandButton value="ALTERAR" style="font-size: small; font-weight: bolder" />
-                            </div>
-                        </p:column>
-                        <p:column colspan="20">
-                            <div style="text-align: center">
-                                <p:commandButton value="TURMA INTEIRA" style="font-size: small; font-weight: bolder" />
-                            </div>
-                        </p:column>
-                    </p:row>
                 </p:panelGrid>
+-->
 
-                <p:dialog header="Visualização" widgetVar="dlgo">
+
+                <p:dialog header="Visualização" widgetVar="visualizar">
                     <h:panelGrid columns="2">
                         <h:outputText value="ID Matrícula:" />
-                        <p:inputText value="001" style="width: 60%" />
+                        <p:inputText value="#{gerenciarPresenca.selecionado.id}" disabled="true"/>
                         <h:outputText value="Nome:" />
-                        <p:inputText value="Jousué dos Santos Junior" style="width: 80%" />
+                        <p:inputText value="#{gerenciarPresenca.selecionado.aluno.nome}" disabled="true"/>
                         <h:outputText value="Curso:" />
-                        <p:inputText value="Russo" />
+                        <p:inputText value="#{gerenciarNota.selecionado.matricula.curso}" disabled="true"/>
                         <h:outputText value="Nível:" />
-                        <p:inputText value="Basico I" />
+                        <p:inputText value="#{gerenciarNota.selecionado.matricula.nivel}" disabled="true"/>
                         <br/>
-                        <h:outputText/>
-                        <h:outputText value="Dias da Semana:" />
-                        <p:inputText value="Terça e Quinta" />
                         <h:outputText value="Mês:" />
                         <p:selectOneMenu>
                             <f:selectItem itemLabel="Fevereiro" itemValue="2" />
@@ -143,7 +124,16 @@
                             <f:selectItem itemLabel="Dezembro" itemValue="12" />
                         </p:selectOneMenu>
                     </h:panelGrid>
+                    
+                    <p:dataTable var="presenca" value="#{gerenciarPresenca.presenca}" emptyMessage="Não há presença adicionadas para este mês.">
+                        <h:outputText value="#{gerenciarPresenca.presenca.dia}"/>
+                        <p:selectBooleanButton value="#{gerenciarPresenca.presenca.alteraEstado(gerenciaPresenca.presenca.presAus)}" offLabel="X" onLabel="O" disabled="true"/>
+                    </p:dataTable>    
+                    <br/>
+                    <p:separator/>
+                    <p:commandButton value="Sair" ajax="true" style="color: red; font-weight: bolder; font-size: small" onclick="visualizar.hide();"/>
 
+<!--                    
                     <p:panelGrid style="margin-top: 20px">
                         <f:facet name="header">
                             <p:row>
@@ -173,24 +163,22 @@
                             </p:row>
                         </f:facet>    
                     </p:panelGrid>
+-->
                 </p:dialog> 
 
                 <p:growl showDetail="false" id="gPresenca"/>
 
-                <p:dialog header="Alterar Presença" widgetVar="dlgo1">
+                <p:dialog header="Alterar Presença" widgetVar="alterar">
                     <h:panelGrid columns="2">
                         <h:outputText value="ID Matrícula:" />
-                        <p:inputText value="001" style="width: 60%" />
+                        <p:inputText value="#{gerenciarPresenca.selecionado.id}" disabled="true"/>
                         <h:outputText value="Nome:" />
-                        <p:inputText value="Jousué dos Santos Junior" style="width: 80%" />
+                        <p:inputText value="#{gerenciarPresenca.selecionado.aluno.nome}" disabled="true"/>
                         <h:outputText value="Curso:" />
-                        <p:inputText value="Russo" />
+                        <p:inputText value="#{gerenciarNota.selecionado.matricula.curso}" disabled="true"/>
                         <h:outputText value="Nível:" />
-                        <p:inputText value="Basico I" />
+                        <p:inputText value="#{gerenciarNota.selecionado.matricula.nivel}" disabled="true"/>
                         <br/>
-                        <h:outputText/>
-                        <h:outputText value="Dias da Semana:" />
-                        <p:inputText value="Terça e Quinta" />
                         <h:outputText value="Mês:" />
                         <p:selectOneMenu>
                             <f:selectItem itemLabel="Fevereiro" itemValue="2" />
@@ -213,7 +201,12 @@
                             <p:row>
                                 <p:column style="font-weight: bold; color: teal" colspan="120">Fevereiro</p:column>
                             </p:row>
-
+                            
+                        <p:dataTable var="presenca" value="#{gerenciarPresenca.presenca}" emptyMessage="Não há presença adicionadas para este mês.">
+                            <h:outputText value="#{gerenciarPresenca.presenca.dia}"/>
+                            <p:selectBooleanButton value="#{gerenciarPresenca.presenca.alteraEstado(gerenciaPresenca.presenca.presAus)}" offLabel="X" onLabel="O" disabled="false"/>
+                        </p:dataTable>    
+<!--
                             <p:row>
                                 <p:column colspan="10" style="font-weight: bold; color: blue">5</p:column>
                                 <p:column colspan="10" style="font-weight: bold; color: blue">7</p:column>
@@ -253,18 +246,19 @@
                             </p:row>
                         </f:facet>    
                     </p:panelGrid>
+-->
                     <br/>
-                    <p:commandButton value="CANCELAR" style="color: red; font-weight: bolder; font-size: small" onclick="dlgo1.hide()"/>
-                    <p:commandButton value="SALVAR" style="color: green; font-weight: bolder; font-size: small; margin-left: 10px" actionListener="#{gmessages.alterar}" update="gPresenca" oncomplete="dlgo1.hide()"/>
+                    <p:commandButton value="CANCELAR" style="color: red; font-weight: bolder; font-size: small" onclick="alterar.hide()"/>
+                    <p:commandButton value="SALVAR" style="color: green; font-weight: bolder; font-size: small; margin-left: 10px" actionListener="#{gmessages.alterar}" update="gPresenca" oncomplete="alterar.hide()"/>
                 </p:dialog>
 
 
-                <p:dialog header="Lista de Presença da Turma" widgetVar="dlgo2">
+                <p:dialog header="Lista de Presença da Turma" widgetVar="turma">
                     <h:panelGrid columns="2">
                         <h:outputText value="Turma" />
-                        <p:inputText value="04" />
+                        <p:inputText value="" />
                         <h:outputText value="Professor:" />
-                        <p:inputText value="Natasha" />
+                        <p:inputText value="" />
                         <h:outputText/>
                         <br/>
                         <h:outputText value="Mês:" />
