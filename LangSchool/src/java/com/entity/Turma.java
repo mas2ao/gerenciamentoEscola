@@ -4,6 +4,7 @@
  */
 package com.entity;
 
+import java.io.Serializable;
 import javax.persistence.*;
 
 /**
@@ -12,7 +13,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "Turma")
-public class Turma {
+public class Turma implements Serializable {
     @Id 
     @GeneratedValue
     @Column (name = "id")
@@ -37,6 +38,22 @@ public class Turma {
     
     @Column (name = "vagas")
     private int vagas;
+    
+    @Column(name = "estado")
+    private String estado;
+    
+    public Turma(){
+        this.estado = "ativo";
+    }
+
+    public Turma(Professor professor, Nivel nivel, String turma, String descricao, int vagas) {
+        this.professor = professor;
+        this.nivel = nivel;
+        this.turma = turma;
+        this.descricao = descricao;
+        this.vagas = vagas;
+        this.estado = "ativo";
+    }
     
     public void setId(int id){
         this.id = id;
@@ -92,5 +109,21 @@ public class Turma {
     
     public int getVagas(){
         return this.vagas;
-    }    
+    }
+    
+    public void setEstado(String estado){
+        this.estado = estado;
+    }
+    
+    public String getEstado(){
+        return this.estado;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if(o == null || !(o instanceof Turma))
+            return false;
+        return (((Turma)o).getTurma().equals(this.turma));
+    }
+    
 }

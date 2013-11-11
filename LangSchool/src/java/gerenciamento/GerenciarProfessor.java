@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package gerenciamento;
 
 import com.entity.Professor;
@@ -11,51 +8,32 @@ import com.util.CriteriaGroup;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 
-/**
- *
- * @author john
- */
 @ManagedBean
 public class GerenciarProfessor {
-    private String nome;
-    private String email;
-    private String telefone;
+    private Professor professor;
     private List<Professor> professores;
-    private EntityPersist ep = new EntityPersist();
+    private EntityPersist ep;
     
-    public void setNome(String nome){
-        this.nome = nome;
+    public GerenciarProfessor(){
+        professor = new Professor();
+        ep = new EntityPersist();
+        professores = ep.search(Professor.class, 
+                new CriteriaGroup("eq","estado","ativo",null));
     }
     
-    public String getNome(){
-        return this.nome;
+    public void setProfessor(Professor professor){
+        this.professor = professor;
     }
     
-    public void setEmail(String email){
-        this.email = email;
-    }
-    
-    public String getEmail(){
-        return this.email;
-    }
-    
-    public void setTelefone(String telefone){
-        this.telefone = telefone;
-    }
-    
-    public String getTelefone(){
-        return this.telefone;
+    public Professor getProfessor(){
+        return this.professor;
     }
     
     public List<Professor> getProfessores(){
         return this.professores;
     }
     
-    public void cadastrarProfessor() {
-        Professor professor = new Professor();
-        professor.setNome(nome);
-        professor.setEmail(email);
-        professor.setTelefone(telefone);
+    public void adicionarProfessor(){
         try {
             ep.save(professor);
         } catch (Exception ex) {

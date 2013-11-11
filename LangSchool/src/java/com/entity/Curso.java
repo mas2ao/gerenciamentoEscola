@@ -16,8 +16,21 @@ public class Curso implements Serializable {
     private String nome;
     @Column(name = "descricao")
     private String descricao;
+    @Column(name = "estado")
+    private String estado;
     @OneToMany(mappedBy="curso")
     private Set<Nivel> niveis;
+    
+    public Curso() {
+        this.estado = "ativo";
+    }
+
+    public Curso(String nome, String descricao) {
+        this.nome = nome;
+        this.descricao = descricao;
+        this.estado = "ativo";
+    }
+    
     
     public int getId() {
         return id;
@@ -42,5 +55,23 @@ public class Curso implements Serializable {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     } 
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstadoAtivo() {
+        this.estado = "ativo";
+    }
+
+    public void setEstadoInativo() {
+        this.estado = "inativo";
+    }
     
+    @Override
+    public boolean equals(Object o) {
+        if(o == null || !(o instanceof Curso))
+            return false;
+        return (((Curso)o).getNome().equals(this.nome));
+    }
 }

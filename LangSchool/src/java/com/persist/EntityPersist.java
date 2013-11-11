@@ -20,7 +20,7 @@ public class EntityPersist extends HibernateUtil {
         retValue = "success";
         tx = null;
     }
-    
+
     //Cria um tipo metodo da funcao "meth"
     //A var "method" ira "apontar" para a funcao com o nome "meth"
     private Method createMethod(String meth, Class<?>... types) {
@@ -62,30 +62,30 @@ public class EntityPersist extends HibernateUtil {
     public String save(Object obj) throws Exception {
         return doSerialize(obj, createMethod("saveFunction", Object.class));
     }
-    
+
     //Para deletar
     private void delFunction(Object obj) {
         session.delete(obj);
     }
-    
+
     public String delete(Object obj) throws Exception {
         return doSerialize(obj, createMethod("delFunction", Object.class));
     }
-    
+
     //Para fazer update
     private void updateFunction(Object obj) {
         session.update(obj);
     }
-    
+
     public String update(Object obj) throws Exception {
         return doSerialize(obj, createMethod("updateFunction", Object.class));
     }
-    
+
     public List search(Class cName, CriteriaGroup... addCrit) {
         init();
         List crit;
         Criteria criteria = session.createCriteria(cName);
-        for(CriteriaGroup cg : addCrit) {
+        for (CriteriaGroup cg : addCrit) {
             criteria.add(createRestriction(cg));
         }
         crit = criteria.list();
@@ -94,14 +94,44 @@ public class EntityPersist extends HibernateUtil {
     }
 
     private Criterion createRestriction(CriteriaGroup cg) {
-        if(cg.type.equals("like")) return Restrictions.like(cg.attribute, cg.valueFrom);
-        if(cg.type.equals("eq")) return Restrictions.eq(cg.attribute, cg.valueFrom);
-        if(cg.type.equals("lt")) return Restrictions.lt(cg.attribute, cg.valueFrom);
-        if(cg.type.equals("gt")) return Restrictions.gt(cg.attribute, cg.valueFrom);
-        if(cg.type.equals("ge")) return Restrictions.ge(cg.attribute, cg.valueFrom);
-        if(cg.type.equals("le")) return Restrictions.le(cg.attribute, cg.valueFrom);
-        if(cg.type.equals("between")) return Restrictions.between(cg.attribute, cg.valueFrom, cg.valueTo);
-        if(cg.type.equals("sql")) return Restrictions.sqlRestriction(cg.attribute);
+        if (cg.type.equals("like")) {
+            return Restrictions.like(cg.attribute, cg.valueFrom);
+        }
+        if (cg.type.equals("eq")) {
+            return Restrictions.eq(cg.attribute, cg.valueFrom);
+        }
+        if (cg.type.equals("lt")) {
+            return Restrictions.lt(cg.attribute, cg.valueFrom);
+        }
+        if (cg.type.equals("gt")) {
+            return Restrictions.gt(cg.attribute, cg.valueFrom);
+        }
+        if (cg.type.equals("ge")) {
+            return Restrictions.ge(cg.attribute, cg.valueFrom);
+        }
+        if (cg.type.equals("le")) {
+            return Restrictions.le(cg.attribute, cg.valueFrom);
+        }
+        if (cg.type.equals("between")) {
+            return Restrictions.between(cg.attribute, cg.valueFrom, cg.valueTo);
+        }
+        if (cg.type.equals("sql")) {
+            return Restrictions.sqlRestriction(cg.attribute);
+        }
         return null;
+    }
+
+    public void updateDb() {
+        init();
+        session.close();
+    }
+    
+    public Object mergeObject(Object o) {
+        init();
+        return session.merge(o);
+    }
+    
+    public void endMerge() {
+        session.close();
     }
 }

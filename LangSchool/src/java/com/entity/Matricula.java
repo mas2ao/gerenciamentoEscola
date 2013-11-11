@@ -1,9 +1,13 @@
 package com.entity;
 
+import com.hibernate.HibernateUtil;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.*;
+import org.hibernate.Session;
         
 @Entity
 @Table(name = "Matricula")
@@ -28,7 +32,7 @@ public class Matricula implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date dataMatricula;
     
-    @OneToMany(mappedBy = "matricula")
+    @OneToMany(mappedBy = "matricula")  
     private Set<Presenca> presenca;
     
     @OneToMany(mappedBy = "matricula")
@@ -37,8 +41,13 @@ public class Matricula implements Serializable {
     @OneToMany(mappedBy = "matricula")
     private Set<ReposicaoAula> reposicoes;
 
-    @Column(name = "estado")
-    private String estado;
+    public Matricula() {}
+    
+    public Matricula(Aluno aluno, Turma turma, Date dataMatricula) {
+        this.aluno = aluno;
+        this.turma = turma;
+        this.dataMatricula = dataMatricula;
+    }    
     
     public int getId() {
         return id;
@@ -46,6 +55,10 @@ public class Matricula implements Serializable {
 
     public Nota getNotas() {
         return notas;
+    }
+    
+    public void setNotas(Nota nota) {
+        this.notas = nota;
     }
     
     public Aluno getAluno() {
@@ -71,17 +84,19 @@ public class Matricula implements Serializable {
     public void setDataMatricula(Date dataMatricula) {
         this.dataMatricula = dataMatricula;
     }
-    
-    public String getEstado() {
-        return this.estado;
-    }
-    
-    public void alteraEstado() {
-        if(this.estado.equals("inativo")) this.estado = "ativo";
-        this.estado = "inativo";
-    }
 
-    public boolean getMatricula() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void setPresenca(Set<Presenca> presenca) {
+        this.presenca = presenca;
     }
+    
+    
+    public Set<Presenca> getPresenca() {
+        return this.presenca;
+    }
+    
+    public ArrayList<Presenca> getPresencaList(){
+        return new ArrayList<Presenca>(presenca);
+    }
+    
+    
 }

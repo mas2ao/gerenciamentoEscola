@@ -16,7 +16,7 @@ public class HibernateUtil {
         return fact;
     }
     
-    protected static Session getSession() {
+    public static Session getSession() {
         return sesFactory.openSession();
     }
 }

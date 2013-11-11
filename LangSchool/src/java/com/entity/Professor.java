@@ -1,19 +1,13 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.entity;
 
+import java.io.Serializable;
 import javax.persistence.*;
 
-/**
- *
- * @author john
- */
 @Entity
 @Table(name = "Professor")
-public class Professor {
-    @Id
+public class Professor implements Serializable {
+    @Id 
     @GeneratedValue
     @Column(name = "id")
     private int id;
@@ -27,16 +21,18 @@ public class Professor {
     @Column(name = "telefone")
     private String telefone;
     
+    @Column(name = "estado")
+    private String estado;
+    
+    public Professor(){
+        this.estado = "ativo";
+    }
+
     public Professor(String nome, String email, String telefone) {
         this.nome = nome;
         this.email = email;
         this.telefone = telefone;
-    }
-    
-    public Professor() { }
-    
-    public void setId(int id){
-        this.id = id;
+        this.estado = "ativo";
     }
     
     public int getId(){
@@ -65,5 +61,20 @@ public class Professor {
     
     public String getTelefone(){
         return this.telefone;
+    }
+    
+    public void setEstado(String estado){
+        this.estado = estado;
+    }
+    
+    public String getEstado(){
+        return this.estado;
+    }
+    
+    @Override
+    public boolean equals(Object o) {
+        if(o == null || !(o instanceof Professor))
+            return false;
+        return (((Professor)o).getNome().equals(this.nome));
     }
 }
