@@ -190,9 +190,9 @@
                     </p:panelGrid>
                     <br/>
                     <p:separator/>
-                    <p:commandButton value="CANCELAR" ajax="true" style="color: red; font-size: small" onclick="alterar.hide();"/>
+                    <p:commandButton value="CANCELAR" ajax="true" style="color: red; font-size: small" oncomplete="alterar.hide();" update=":gerNota:tabNotas"/>
                     <p:commandButton value="SALVAR" ajax="true" style="color: green; font-size: small; margin-left: 20px" 
-                                     action="#{gerenciarNota.alterarNota}" oncomplete="alterar.hide()" update="aNota"/>
+                                     action="#{gerenciarNota.alterarNota}"  oncomplete="alterar.hide()" update="aNota, :gerNota:tabNotas"/>
                 </p:dialog>
             </h:form>
             
@@ -273,10 +273,10 @@
                     <br/>
                     <p:separator/>
                     <p:commandButton value="CANCELAR" style="color: red; font-weight: bolder; font-size: small" 
-                                     onclick="turma.hide();"/>
+                                     oncomplete="turma.hide();" update=":gerNota:tabNotas"/>
                     <p:commandButton value="SALVAR" style="color: green; font-weight: bolder; font-size: small; margin-left: 20px" 
                                      action="#{gerenciarNota.todaTurm(gerenciarNota.alunosTurm)}" 
-                                     oncomplete="turma.hide()" update="tNota"/>
+                                     oncomplete="turma.hide()" update="tNota, :gerNota:tabNotas"/>
                 </p:dialog>
             </h:form>
 

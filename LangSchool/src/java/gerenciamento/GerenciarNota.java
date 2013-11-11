@@ -15,8 +15,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import messages.Gmessages;
 
@@ -35,6 +37,7 @@ public class GerenciarNota {
     private List<Matricula> matriculas, alunosTurm;
     private EntityPersist ep = new EntityPersist();
     private GerenciarMatricula busMat = new GerenciarMatricula();
+    boolean resp;
 
     public Nota getNota(){
         return nota;
@@ -99,22 +102,16 @@ public class GerenciarNota {
    
     public void selectMatricula(ActionEvent ae){
         selecionado = (Matricula) ae.getComponent().getAttributes().get("matricula");
-        System.out.println("======SELECIONOU?? ===========" +selecionado.getAluno().getNome());
-        System.out.println("nota" +selecionado.getNotas().getNota1());
-        System.out.println("nota" +selecionado.getNotas().getNota2());
-        System.out.println("nota" +selecionado.getNotas().getNota3());
-        System.out.println("nota" +selecionado.getNotas().getNota4());
-        System.out.println("nota" +selecionado.getNotas().getMedia());
-        
     }
     
     public void consultarMatricula(ActionEvent ae){
         if (param.equals("nome")){
+            //System.out.println("buscando por nome");
             busMat.setBusca(busca);
             busMat.setParam(param);
             busMat.consultarMatricula(ae);
         } else if (param.equals("curso")){
-            System.out.println("buscando por curso");
+            //System.out.println("buscando por curso");
             if (busca.trim().equals("")){
                 matriculas = ep.search(Matricula.class);
             } else {
@@ -137,7 +134,7 @@ public class GerenciarNota {
             }    
             busMat.setMatriculas(matriculas);
         } else if (param.equals("turma")){
-            System.out.println("buscando por turma");
+            //System.out.println("buscando por turma");
             if (busca.trim().equals("")){
                 matriculas = ep.search(Matricula.class);
             } else {
@@ -155,28 +152,36 @@ public class GerenciarNota {
 
     public void consultarTurma(ActionEvent ae){
         selectTurma(ae);
-        System.out.println("seleciona feitoo ==========");
         turmId = seleciona.getTurma();
-        System.out.println("turmID=====" +turmId);
         alunosTurm = ep.search(Matricula.class, new CriteriaGroup("eq", "turma", turmId, null));
-        System.out.println("lista de alunos criadaa ==================");
     }
     
     public void selectTurma(ActionEvent ae){
         seleciona = (Matricula) ae.getComponent().getAttributes().get("matricula");
     }
+    
+    public boolean trataNota(Matricula mat) {
+        if (((mat.getNotas().getNota1()<0) || (mat.getNotas().getNota2()<0) || (mat.getNotas().getNota3()<0) || 
+                (mat.getNotas().getNota4()<0)) || ((mat.getNotas().getNota1()>100) || (mat.getNotas().getNota2()>100) ||
+                (mat.getNotas().getNota3()>100) || (mat.getNotas().getNota4()>100))){
+            return false;
+        } else return true;
+    }
      
     public String alterarNota(){
-        System.out.println("COMEÇANDO A SALVAR");
-        System.out.println("nota 1==" +selecionado.getNotas().getNota1());
-        System.out.println("ID nota ==" +selecionado.getNotas().getId());
+        FacesContext c = FacesContext.getCurrentInstance();
         try {
-            calcularMedia(selecionado.getNotas().getNota1(), selecionado.getNotas().getNota2(), selecionado.getNotas().getNota3(), selecionado.getNotas().getNota4());
-            selecionado.getNotas().setMedia(med);
-            System.out.println("media=====" +med);
-            ep.update(selecionado.getNotas());
-            Gmessages notif = new Gmessages();
-            notif.alterar(null);
+            resp = trataNota(selecionado);
+            if (!resp){
+                c.addMessage(null, new FacesMessage("Valor inválido para NOTA!"));
+            } else {
+                calcularMedia(selecionado.getNotas().getNota1(), selecionado.getNotas().getNota2(), selecionado.getNotas().getNota3(), selecionado.getNotas().getNota4());
+                selecionado.getNotas().setMedia(med);
+                ep.update(selecionado.getNotas());
+                Gmessages notif = new Gmessages();
+                notif.alterar(null);
+            }
+            consultarMatricula(null);
             return "";
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -185,13 +190,22 @@ public class GerenciarNota {
     }
     
     public void alterarNotaTurm(Matricula mat){
+        FacesContext c = FacesContext.getCurrentInstance();
+        resp = trataNota(mat);
+        if (!resp){
+            c.addMessage(null, new FacesMessage("Valor inválido para NOTA!"));
+        } else {
             calcularMedia(mat.getNotas().getNota1(), mat.getNotas().getNota2(), mat.getNotas().getNota3(), mat.getNotas().getNota4());
             mat.getNotas().setMedia(med);
-        try {  
-            ep.update(mat.getNotas());
-        } catch (Exception ex) {
-            Logger.getLogger(GerenciarNota.class.getName()).log(Level.SEVERE, null, ex);
+            try {  
+                ep.update(mat.getNotas());
+                Gmessages notif = new Gmessages();
+                notif.alterar(null); 
+            } catch (Exception ex) {
+                Logger.getLogger(GerenciarNota.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
+        
     }
     
     public void todaTurm(List<Matricula> mat){
@@ -199,8 +213,6 @@ public class GerenciarNota {
             alterarNotaTurm(k);
         }
         consultarMatricula(null);
-        Gmessages notif = new Gmessages();
-        notif.alterar(null);
     }
     
     public void calcularMedia(int nota1, int nota2, int nota3, int nota4){

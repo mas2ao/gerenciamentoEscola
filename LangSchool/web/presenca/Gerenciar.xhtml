@@ -71,7 +71,7 @@
                     </h:panelGrid>
 
                     <p:dataTable value="#{gerenciarPresenca.ind}" var="pog">
-                        <p:columns var="tabAlu"  value="#{gerenciarPresenca.lpres}"  headerText="#{tabAlu.diaFormated}">
+                        <p:columns var="tabAlu"  value="#{gerenciarPresenca.lpres}"  headerText="#{tabAlu.dia}">
                             <center>
                                 <p:selectBooleanButton value="#{tabAlu.estado}" offLabel="X" onLabel="O" 
                                                        disabled="true" style="font-size: small"/>
@@ -99,7 +99,7 @@
                     <br/> 
                     <h:panelGrid>
                         <h:outputText value="Data:"/>
-                        <p:calendar disabledWeekends="true" value="#{gerenciarPresenca.data}" 
+                        <p:calendar id="popupCal" disabledWeekends="true" value="#{gerenciarPresenca.data}" 
                                     mindate="1/1/13" maxdate="12/31/13"/>
                         <p:selectOneRadio value="#{gerenciarPresenca.estado}">
                             <f:selectItem itemLabel="PRESENTE" itemValue="True"/>
@@ -107,7 +107,7 @@
                         </p:selectOneRadio>
                         <p:separator/>
                         <p:commandButton value="Adicionar" style="font-weight: bolder; font-size: small" 
-                                         action="#{gerenciarPresenca.adicionarPresencaTurm}" oncomplete="dlg.show();" 
+                                         action="#{gerenciarPresenca.adicionarPresencaTurm(seleciona)}" oncomplete="dlg.show();" 
                                          update="" process="@this"/>
                     </h:panelGrid>
 

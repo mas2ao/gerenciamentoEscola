@@ -55,9 +55,6 @@ public class GerenciarPresenca {
     private List<Integer> ind = new ArrayList<Integer>();
     private List<Integer> qtur = new ArrayList<Integer>();
 
-    public GerenciarPresenca() {
-        data = new Date();
-    }
 
     public Presenca getPresenca() {
         return presenca;
@@ -250,16 +247,8 @@ public class GerenciarPresenca {
         selecionado = (Matricula) ep.mergeObject(selecionado);
         System.out.println("presenca:" + selecionado.getPresenca());
         Lpres = new ArrayList<Presenca>(selecionado.getPresenca());
-        for (Presenca k : Lpres){
-            System.out.println("PRESENCAAA  " +k.getDiaFormated());
-            System.out.println("ESTADOOOO  " +k.getEstado());
-        }
         ind.add(1);
         ep.endMerge();
-    }
-
-    public void selectMatriculaShow(ActionEvent ae) {
-        selecionado = (Matricula) ae.getComponent().getAttributes().get("matricula");
     }
 
     public String consultarTurma(Matricula mat) {
@@ -295,34 +284,38 @@ public class GerenciarPresenca {
         return nullP;
     }
 
-    public void adicionarPresencaIndiv() {
-        Presenca nPres = new Presenca();
-        nPres.setDia(data);
-        nPres.setEstado(estado);
-        nPres.setMatricula(selecionado);
-        try {
-            ep.save(nPres);
-        } catch (Exception ex) {
-            Logger.getLogger(GerenciarPresenca.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    public String adicionarPresencaTurm() {
-        Presenca nPres = new Presenca();
-        System.out.println("HAHAHAHAHAHAH");
-        for (Matricula k : alunosTurm) {
-            nPres.setDia(data);
-            nPres.setEstado(estado);
-            System.out.println("Dia: " + nPres.getDia() + " " + data);
-            nPres.setMatricula(k);
+    public String adicionarPresencaTurm(Matricula mat){
+        turmId = mat.getTurma();
+        List<Matricula> lmat = ep.search(Matricula.class, new CriteriaGroup("eq", "turma", turmId, null));
+        for (Matricula k: lmat){
+            Presenca presen = new Presenca(data, false);
+            presen.setMatricula(k);
             try {
-                ep.save(nPres);
+                ep.update(k);
+                ep.save(presen);
             } catch (Exception ex) {
                 Logger.getLogger(GerenciarPresenca.class.getName()).log(Level.SEVERE, null, ex);
+            
             }
         }
         return "";
     }
+    
+//    public String adicionarPresencaTurm() {
+//        System.out.println("HAHAHAHAHAHAH");
+//        for (Matricula k : alunosTurm) {
+//            Presenca nPres = new Presenca(data, estado);
+//            System.out.println("Dia: " + nPres.getDia() + " " + data);
+//            nPres.setMatricula(k);
+//            try {
+//                ep.update(k);
+//                ep.save(nPres);
+//            } catch (Exception ex) {
+//                Logger.getLogger(GerenciarPresenca.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        }
+//        return "";
+//    }
 
     public void msgEstado() {
         String mess = presente ? "Presente" : "Ausente";
@@ -365,4 +358,5 @@ public class GerenciarPresenca {
         notif.alterar(null);
         return "";
     }
+    
 }

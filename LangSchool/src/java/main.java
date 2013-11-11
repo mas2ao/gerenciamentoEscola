@@ -11,6 +11,7 @@ import com.persist.EntityPersist;
 import com.sun.org.apache.bcel.internal.generic.AALOAD;
 import com.util.CriteriaGroup;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -90,11 +91,14 @@ public class main {
             
             //Presenca
             Date dat = new Date();
-            Presenca presen = new Presenca();
-            presen.setEstado(false);
-            presen.setDia(dat);
-            presen.setMatricula(mat);
-            ep.save(presen);
+            Turma turmId = mat.getTurma();
+            List<Matricula> lmat = ep.search(Matricula.class, new CriteriaGroup("eq", "turma", turmId, null));
+            for (Matricula k: lmat){
+                Presenca presen = new Presenca(dat, false);
+                presen.setMatricula(k);
+                ep.update(k);
+                ep.save(presen);
+      }
             
                     
             //---------------------------------------------
